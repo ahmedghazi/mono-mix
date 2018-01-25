@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	.themes
+		-let len = categories.length
+		-var c = 0;
+
+		div.col
+			each category in categories
+				if c <= len/2
+					include item
+				-c++
+
+		-c = 0;
+		div.col
+			each category in categories
+				if c > len/2
+					include item
+				-c++

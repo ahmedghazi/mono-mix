@@ -1,0 +1,39 @@
+body {
+  //padding: $padding2;
+  &.loading{
+  	opacity: 0.5;
+  	cursor: wait;
+  }
+}
+
+#page{
+	padding: $padding2;
+	padding-top: 125px;
+	min-height: 100vh;
+
+	
+}
+
+
+pre{
+	display: block;
+	background-color: yellow;
+	color: black;
+}
+
+.deco{
+	z-index: 9;
+	position: fixed;
+	top:0; height: 100vh; width: 10px;
+	display: flex;
+	flex-direction: column;
+	&.deco-left{left:0}
+	&.deco-right{right:0}
+	div{
+		width: 10px; height: 50%;
+		&.bg-blue{background-color: #0014ff;}
+		&.bg-green{background-color: #4fff5e;}
+		&.bg-purple{background-color: #9428f0;}
+		&.bg-red{background-color: #f01644;}
+	}
+}

@@ -1,0 +1,24 @@
+.row
+    .col-xs-12.col-md-3
+        h1 
+            a(href="/") 
+                img(src="img/mono-mix-logo.svg" alt="#{title}")
+                
+    .col-xs-12.col-md-6
+        .description.text-center Themes based music research
+
+    .col-xs-12.col-md-3
+        #search-wrap.text-right
+            form
+                label(for="s") Search
+                input(type="text" id="s" name="s" placeholder="" autocomplete="off" value="")
+                button(type="submit")
+                    img(src="img/loupe.svg" alt="Search") 
+                button(type="button" id="close")
+                    img(src="img/close.svg" alt="Close")    
+
+.burger.visible-xs
+    i
+
+    
+

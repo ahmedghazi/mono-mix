@@ -1,0 +1,39 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    block css
+      link(rel='stylesheet', href='/css/style.css')
+    block js
+      if ENV_DEVELOPMENT
+        script(src='http://localhost:35729/livereload.js')
+      script(src='/js/vendor/modernizr.min.js')
+  body.loading
+
+    #page
+      header
+        include header
+      
+      block content
+
+      footer
+        include footer
+      #loader
+        img(src="img/loader.png")
+      
+      //include footer
+
+
+    script(src='/js/vendor/jquery.min.js')
+    
+    //- script(src='/js/vendor/smooth-state.js')
+    script(src='/js/_plugins.js')
+    script(src='/js/YoutubePlayer.js')
+    script(src='/js/player.js')
+    script(src='/js/search-controller.js')
+
+    script(src='/js/app.js')
+    //-script(src='/js/functions.min.js')
+

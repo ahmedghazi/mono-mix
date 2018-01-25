@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Basis Grotesque';
+  src: url('../fonts/basis_grotesque_regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/basis_grotesque_regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/basis_grotesque_regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/basis_grotesque_regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/basis_grotesque_regular.svg#b40c8faa0546b0e86131f951cd9b2489') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
+
+
+body {
+	font: $font1 $font;
+	color: $color;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3{
+	margin: 0;
+	font-size: $font1;
+	font-weight: 400;
+}
+
+a {
+	color: $color;
+	text-decoration: none;
+	cursor: url(../img/cursor-pointer.png) 31 23,auto;
+	//&:hover{color: #fff}
+}
+
+.btn{
+	border: 2px solid;
+	display: inline-block;
+	width: 100px; height: 100px;
+	border-radius: 100%;
+	text-align: center;
+	line-height: 100px;
+	background-color: black;
+	color: white;
+	&:hover{
+		background-color: white;
+		color: black;
+	}
+}

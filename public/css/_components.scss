@@ -1,0 +1,89 @@
+@keyframes loader{
+	from{
+		transform: rotate(0deg);
+	}
+	to{
+		transform: rotate(360deg);
+	}
+}
+
+#loader{
+	position: fixed;
+	left: 50%; top: 50%;
+	transform: translate(-50%, -50%);
+	display:none;
+	z-index: 999999;
+	&:hover{cursor: none;}
+	.is-exiting &{display: block}
+}
+
+#loader img{
+	animation: loader .3s linear infinite;
+}
+
+
+
+#search-wrap{
+	position: fixed;
+	top: $padding1; right: $padding2;
+	width: 150px; height: 27px;
+	@include anime(.3s);
+	form{
+		font-size: $font1;
+		//border-bottom: 3px solid;
+		display: flex;
+		justify-content: flex-end;
+		max-height: 27px;
+		@include anime(.3s);
+		label{
+			margin-right: $padding1;
+			cursor: pointer;
+			@include anime(.3s);
+		}
+		input{
+			background-color: transparent;
+			line-height: $font1-ls;
+			width: 0px;
+			padding: 0;
+			text-align: left;
+			border-bottom: $border solid;
+			color: $red;
+			//display: none;
+			@include anime(.3s);
+			@include placeholder($color);
+			&:focus{
+				max-width: 80%;
+			}
+		}
+		
+		button{
+			line-height: $font1-ls;
+			//max-height: 27px;
+			&[type=button]{display: none;}
+		}
+	}
+
+	&.is-active{
+		width: 100vw; height: 112px;
+		border-bottom: $border solid;
+		background-color: white;
+		color: $red;
+		top: 0; right: 0;
+		padding: $padding1 $padding2;
+		line-height: 30px;
+		form{
+			//justify-content: space-between;
+			max-height: 30px;
+			input{
+				max-width: none;
+				width: calc(100% - 155px);
+				//display: block;
+				margin-right: $padding1; 
+			}
+			button{
+				&[type=submit]{display: none;}
+				&[type=button]{display: block;}
+			}
+		}
+	}
+}
