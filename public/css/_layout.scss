@@ -21,19 +21,47 @@ pre{
 	color: black;
 }
 
-.deco{
+.stripe{
 	z-index: 9;
 	position: fixed;
 	top:0; height: 100vh; width: 10px;
 	display: flex;
 	flex-direction: column;
-	&.deco-left{left:0}
-	&.deco-right{right:0}
+	&.stripe-left{left:0}
+	&.stripe-right{right:0}
 	div{
 		width: 10px; height: 50%;
 		&.bg-blue{background-color: #0014ff;}
 		&.bg-green{background-color: #4fff5e;}
 		&.bg-purple{background-color: #9428f0;}
 		&.bg-red{background-color: #f01644;}
+	}
+}
+
+#deco{
+	pointer-events: none;
+	width: 100vw; height: 100vh;
+	position: fixed!important;
+	left: 0; top: 0;
+	//transform: translate3d(-50%,-50%, 0px);
+	//transform: translateX(-50%);
+	//transform: translateY(-50%);
+	perspective: 500px;
+  	perspective-origin: center 200px;
+	display: flex;
+	img{
+		margin: auto;
+		animation: deco 1s ease-in-out infinite alternate;
+	}
+}
+
+@keyframes deco{
+	from{
+		opacity: 1;
+		transform: translate3d(0px, 0px, 0px);
+	}
+	to{
+		opacity: 0;
+		transform: translate3d(0px, 0px, -200vh);
 	}
 }

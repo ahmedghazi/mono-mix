@@ -29,7 +29,7 @@ var playerController = (function () {
             if(videoIDX-1 >= 0)videoIDX--;
             else videoIDX = arrVideoIds.length-1;
 
-            playByIdx();
+            play_by_idx();
         });
 
         pubsub.on("NEXT", function(e){
@@ -37,7 +37,7 @@ var playerController = (function () {
             if(videoIDX+1 < arrVideoIds.length)videoIDX++;
             else videoIDX = 0;
 
-            playByIdx();
+            play_by_idx();
         });
         
         $("html").on("click", ".theme", function(e){
@@ -54,7 +54,8 @@ var playerController = (function () {
                 arrVideoIds.push(videoID);
             });
 
-            //playByIdx();
+            //play_by_idx();
+            update_deco();
             
         });
 
@@ -62,7 +63,7 @@ var playerController = (function () {
             e.stopPropagation();
             
             videoIDX = $(this).index();
-            playByIdx();
+            play_by_idx();
         });
 
         $("html").on("click", ".track.is-playing", function(e){
@@ -72,12 +73,25 @@ var playerController = (function () {
         });
     }
 
-    function playByIdx() {
+    function play_by_idx() {
         console.log(videoIDX)
         _YoutubePlayer.loadVideoById(arrVideoIds[videoIDX]);
 
         $(".track").removeClass("is-playing")
         $(".theme.active").find(".track").eq(videoIDX).addClass("is-playing");
+    }
+
+    function update_deco() {
+        $("#deco").html("")
+        var cat = $(".theme.active").find("h2").text().trim().toLowerCase();
+        var svg = "img/visuals/"+cat+".svg";
+        var image= new Image();
+        image.onload = function(){
+            console.log(this)
+            $("#deco").html(this)
+        };
+        image.src = svg;
+        
     }
 
 })();

@@ -273,3 +273,11 @@ $sass-burger-add-vendor-prefixes: true !default;
         transform: translateY(-($burger-gutter + $burger-height)) rotate(-45deg);
     }
 }
+
+@mixin center{
+  &{
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

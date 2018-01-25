@@ -2640,7 +2640,7 @@ pre {
   background-color: yellow;
   color: black; }
 
-.deco {
+.stripe {
   z-index: 9;
   position: fixed;
   top: 0;
@@ -2648,29 +2648,50 @@ pre {
   width: 10px;
   display: flex;
   flex-direction: column; }
-  .deco.deco-left {
+  .stripe.stripe-left {
     left: 0; }
-  .deco.deco-right {
+  .stripe.stripe-right {
     right: 0; }
-  .deco div {
+  .stripe div {
     width: 10px;
     height: 50%; }
-    .deco div.bg-blue {
+    .stripe div.bg-blue {
       background-color: #0014ff; }
-    .deco div.bg-green {
+    .stripe div.bg-green {
       background-color: #4fff5e; }
-    .deco div.bg-purple {
+    .stripe div.bg-purple {
       background-color: #9428f0; }
-    .deco div.bg-red {
+    .stripe div.bg-red {
       background-color: #f01644; }
 
+#deco {
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  perspective: 500px;
+  perspective-origin: center 200px;
+  display: flex; }
+  #deco img {
+    margin: auto;
+    animation: deco 1s ease-in-out infinite alternate; }
+
+@keyframes deco {
+  from {
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px); }
+  to {
+    opacity: 0;
+    transform: translate3d(0px, 0px, -200vh); } }
 header {
   background-color: white;
   position: fixed;
   left: 10px;
   top: 0;
   right: 10px;
-  padding: 10px 20px;
+  padding: 10px;
   width: calc(100vw - 20px);
   z-index: 99;
   transition: all 0.2s ease-in-out 0s; }
@@ -2683,9 +2704,11 @@ header {
   .themes .col {
     max-width: 50%; }
     .themes .col:nth-child(1) {
-      margin-right: 40px; }
+      padding-right: 40px; }
   .themes .theme {
     cursor: pointer; }
+    .themes .theme:hover .item-heading h2 {
+      color: #f01644; }
     .themes .theme:hover .item-heading .duration {
       display: none; }
     .themes .theme:hover .item-heading .pause {
@@ -2714,7 +2737,7 @@ header {
     .themes .theme .item-body {
       display: none; }
       .themes .theme .item-body .mix .track {
-        color: red;
+        color: #f01644;
         border-bottom: 1px solid; }
         .themes .theme .item-body .mix .track .track-name {
           white-space: nowrap;
