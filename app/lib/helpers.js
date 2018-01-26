@@ -181,18 +181,18 @@ exports.record = function(_post, callback) {
         //var theme = _post.message.replace(/theme/gi, "");
         //console.log("_post.message",_post.message)
         //var regex = /THEME\s(\w+)/g;
-        var regex = /(?<=\THEME\s)(\w+)/i;
+        var regex = /(?<=\ THEME\s)(\w+)/i;
         var matches = _post.message.match(regex);
         if(!matches){
-            var regex = /(?<=\THEME:\s)(\w+)/i;
+            var regex = /(?<=\ THEME:\s)(\w+)/i;
             matches = _post.message.match(regex);
         }
         if(!matches){
-            var regex = /(?<=\THEME :\s)(\w+)/i;
+            var regex = /(?<=\ THEME :\s)(\w+)/i;
             matches = _post.message.match(regex);
         }
         if(!matches){
-            var regex = /(?<=\THEME  :\s)(\w+)/i;
+            var regex = /(?<=\ THEME  :\s)(\w+)/i;
             matches = _post.message.match(regex);
         }
         
