@@ -181,19 +181,19 @@ exports.record = function(_post, callback) {
         //var theme = _post.message.replace(/theme/gi, "");
         //console.log("_post.message",_post.message)
         //var regex = /THEME\s(\w+)/g;
-        var regex = /(?<=\btheme\s)(\w+)/i;
-        var matches = _post.message.match(regex);
+
+        var matches = _post.message.match(/(?<=\btheme\s)(\w+)/i);
         if(!matches){
             var regex = /(?<=\btheme:\s)(\w+)/i;
-            matches = _post.message.match(regex);
+            matches = _post.message.match(/(?<=\btheme:\s)(\w+)/i);
         }
         if(!matches){
             var regex = /(?<=\btheme :\s)(\w+)/i;
-            matches = _post.message.match(regex);
+            matches = _post.message.match(/(?<=\btheme :\s)(\w+)/i);
         }
         if(!matches){
             var regex = /(?<=\btheme  :\s)(\w+)/i;
-            matches = _post.message.match(regex);
+            matches = _post.message.match(/(?<=\btheme  :\s)(\w+)/i);
         }
         
         if(!matches){
@@ -201,7 +201,7 @@ exports.record = function(_post, callback) {
         }else{
             //if(matches && matches.length > 0)
             console.log("theme     : ",matches[0])
-            var theme = matches[0];
+            /*var theme = matches[0];
             var query = {name: theme}
             var update = {name: theme}
             Category.findOneAndUpdate(query, update, {
@@ -256,9 +256,9 @@ exports.record = function(_post, callback) {
 
                     
                 });
-            });
+            });*/
 
-            //callback();
+            callback();
 
         }
     }
