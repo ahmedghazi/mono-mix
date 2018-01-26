@@ -1,6 +1,7 @@
 var playerController = (function () {
     var arrVideoIds = [];
     var videoIDX = 0;
+    var theme = "";
     init()
     
     function init() {
@@ -55,7 +56,7 @@ var playerController = (function () {
             });
 
             //play_by_idx();
-            update_deco();
+            
             
         });
 
@@ -74,17 +75,19 @@ var playerController = (function () {
     }
 
     function play_by_idx() {
-        console.log(videoIDX)
+        //console.log(videoIDX)
         _YoutubePlayer.loadVideoById(arrVideoIds[videoIDX]);
 
         $(".track").removeClass("is-playing")
         $(".theme.active").find(".track").eq(videoIDX).addClass("is-playing");
+
+        if(theme != $(".theme.active").find("h2").text().trim().toLowerCase())update_deco();
     }
 
     function update_deco() {
         $("#deco").html("")
-        var cat = $(".theme.active").find("h2").text().trim().toLowerCase();
-        var svg = "img/visuals/"+cat+".svg";
+        theme = $(".theme.active").find("h2").text().trim().toLowerCase();
+        var svg = "img/visuals/"+theme+".svg";
         var image= new Image();
         image.onload = function(){
             console.log(this)
