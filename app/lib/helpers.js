@@ -261,7 +261,7 @@ exports.record = function(_post, callback) {
                 });
             });
 
-            callback();
+            //callback();
 
         }
     }
