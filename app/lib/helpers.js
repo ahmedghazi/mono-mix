@@ -170,7 +170,7 @@ exports.process = function(min, _res) {
 exports.record = function(_post, callback) {
     var self = this;
 
-    if(_post.message.toLowerCase().indexOf("theme") == -1){
+    if(_post.message.toLowerCase().indexOf("them") == -1){
         callback();
     }else if(_post.link.indexOf("youtube") == -1){
         callback();
@@ -182,26 +182,29 @@ exports.record = function(_post, callback) {
         //console.log("_post.message",_post.message)
         //var regex = /THEME\s(\w+)/g;
 
-        var matches = _post.message.match(/(?<=\btheme\s)(\w+)/i);
+        //var matches = _post.message.match(/(?<=\btheme\s)(\w+)/i);
+        
+        var matches = _post.message.match(/theme\s(\w+)/i);
+        
         if(!matches){
-            var regex = /(?<=\btheme:\s)(\w+)/i;
-            matches = _post.message.match(/(?<=\btheme:\s)(\w+)/i);
+            matches = _post.message.match(/theme:\s(\w+)/i);
         }
         if(!matches){
-            var regex = /(?<=\btheme :\s)(\w+)/i;
-            matches = _post.message.match(/(?<=\btheme :\s)(\w+)/i);
+            matches = _post.message.match(/theme :\s(\w+)/i);
         }
         if(!matches){
-            var regex = /(?<=\btheme  :\s)(\w+)/i;
-            matches = _post.message.match(/(?<=\btheme  :\s)(\w+)/i);
+            matches = _post.message.match(/theme  :\s(\w+)/i);
+        }
+        if(!matches){
+            matches = _post.message.match(/thema\s(\w+)/i);
         }
         
         if(!matches){
             callback();
         }else{
             //if(matches && matches.length > 0)
-            console.log("theme     : ",matches[0])
-            /*var theme = matches[0];
+            console.log("theme     : ",matches[1])
+            var theme = matches[0];
             var query = {name: theme}
             var update = {name: theme}
             Category.findOneAndUpdate(query, update, {
@@ -256,7 +259,7 @@ exports.record = function(_post, callback) {
 
                     
                 });
-            });*/
+            });
 
             callback();
 
