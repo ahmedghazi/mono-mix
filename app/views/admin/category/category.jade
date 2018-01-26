@@ -1,0 +1,38 @@
+extends ../layout
+
+
+        
+block content
+
+    h2 
+        span #{title} 
+        a(href="/admin/category/new" class="btn btn-primary") Ajouter
+    hr
+
+    div.clearfix
+   
+    section
+        //pre #{posts}
+       
+        table.table.table-striped
+            thead
+                tr.panel.panel-default
+                    td Date d'inscription
+                    td Nom
+                    td Email
+                    td Type
+                    td Actions
+                    
+            tbody
+            each category in categories
+                tr
+                    td #{moment(category.createdAt).format('MMMM Do YYYY')}
+                    td #{category.name}
+                    td #{category.email}
+                    td #{category.category_type}
+                    td.btn-group
+                        a(href="/admin/category/edit/#{category._id}" class="btn btn-primary") Edit
+                        a(href="/admin/category/delete/#{category._id}" class="btn btn-danger") Delete
+                    
+                    
+        

@@ -1,0 +1,36 @@
+extends ../layout
+
+    
+prepend content
+
+    section.submit
+        //pre #{user}
+        h3= title 
+        
+        form(name="submit", action="/admin/users/new/", method="POST")
+        
+            div.form-group
+                label(for="first_name") Nom
+                input(type="text", class="form-control", name="name" placeholder="" value="")
+
+            div.form-group
+                label(for="email") E-mail
+                input(type="email", class="form-control", name="email" placeholder="" value="")
+            
+            div.form-group
+                label(for="last_name") Password
+                input(type="text", class="form-control", name="password" placeholder="" value="")
+            
+            div.form-group
+                label(for="post_status") Type d'utilisateur
+                select(name="user_type", class="form-control")
+                    option(value="admin") Administrateur
+                    option(value="invite" selected="true") Invité
+            
+
+            div.form-group
+                input(type="submit", class="btn btn-lg btn-primary btn-block", value="Submit")
+
+        
+        
+            

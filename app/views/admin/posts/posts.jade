@@ -1,0 +1,70 @@
+extends ../layout
+
+
+        
+block content
+
+    .clearfix
+        h2.pull-left
+            span #{title} 
+            a(href="/admin/posts/new" class="btn btn-primary") Ajouter
+        .pull-right
+            span total #{posts.length}
+        hr
+
+
+   
+    section
+        //pre #{posts}
+        .row
+            .col-md-12
+                h3 Filtres
+            
+
+            .col-md-12
+                form(method="POST" action="/admin/posts/search/" class="form-inline" role="form")
+                    .form-group
+                        input(type="text", class="form-control", name="s" placeholder="Mots clefs" value="")
+                        input(type="submit", class="btn btn-primary ", value="Chercher")
+        
+        hr 
+            
+        table.table.table-striped
+            thead
+                tr.panel.panel-default
+                    td 
+                        span Nom 
+                        a(href="/admin/posts/sort/name/1") ↑ 
+                        a(href="/admin/posts/sort/name/-1") ↓
+                    td 
+                        span Date 
+                        a(href="/admin/posts/sort/date/1") ↑ 
+                        a(href="/admin/posts/sort/date/-1") ↓
+                    td 
+                        span Categorie 
+                        a(href="/admin/posts/sort/category/1") ↑ 
+                        a(href="/admin/posts/sort/category/-1") ↓
+                    td Invités
+                    td 
+                        span Status 
+                        a(href="/admin/posts/sort/post_status/1") ↑ 
+                        a(href="/admin/posts/sort/post_status/-1") ↓
+                    td Actions
+            tbody
+
+            each post in posts
+                tr
+                    td #{post.name}
+                            
+                    td #{moment(post.createdAt).format('DD.MM.YYYY')}
+
+                    td #{post.category}
+                    td 
+                        if post.users_in
+                            span #{post.users_in.length}
+
+                    td #{post.post_status}
+                    td.btn-group
+                            a(href="/admin/posts/edit/#{post._id}" class="btn btn-primary") Edit
+                            a(target="_blank" href="/c/#{post.category}/#{post.slug}" class="btn btn-default") Voir
+                            a(href="/admin/posts/delete/#{post._id}" class="btn btn-danger") Delete

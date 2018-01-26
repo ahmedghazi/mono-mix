@@ -1,12 +1,14 @@
 .themes{
 	display: flex;
+	justify-content: space-between;
 	.col{
-		max-width: 50%;
-		&:nth-child(1){padding-right: $padding3}
+		//max-width: 50%;
+		//&:nth-child(1){padding-right: $padding3}
 	}
 	.theme{
 		cursor: pointer;
-		
+		min-width: calc(50vw - 40px);
+		max-width: calc(50vw - 40px);
 		&:hover{
 			.item-heading{
 				h2{color: $red;}

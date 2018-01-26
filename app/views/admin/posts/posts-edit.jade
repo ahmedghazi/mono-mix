@@ -1,0 +1,95 @@
+extends ../layout
+
+    
+prepend content
+    
+    section.edit
+   
+        h2
+            span #{title} 
+            a(href="/c/#{post.category}/#{post.slug}" class="btn btn-primary") Voir
+
+        //pre #{post}
+        form(name="submit", action="/admin/posts/edit/#{post._id}", method="post" )
+
+            div.form-group
+                label(for="title") Titre
+                input(type="text", class="form-control", name="title", placeholder="Titre", value="#{post.title}")
+        
+            .row
+                .col-md-4  
+                    div.form-group
+                        label(for="post_status") Status du post
+                        select(name="post_status", class="form-control")
+                            option(value="" disabled="true" selected="true") Selectionnez
+                            option(value="brouillon" selected=post.post_status=="brouillon") Brouillon
+                            option(value="public" selected=post.post_status=="public") Public
+                
+                .col-md-4  
+                    div.form-group
+                        label(for="category") Catégorie
+                        select(name="category", class="form-control")
+                            option(value="" disabled="true" selected="true") Selectionnez
+                            option(value="croisieres" selected=post.category=="croisieres") Croisières
+                            option(value="Convoyages" selected=post.category=="Convoyages") Convoyages
+                            option(value="technique" selected=post.category=="technique") Technique
+                            option(value="reperages" selected=post.category=="reperages") Repérages
+                
+                .col-md-4  
+                    div.form-group
+                        label(for="post_order") Ordre
+                        input(type="number", class="form-control", name="post_order" placeholder="" value="#{post.post_order}")
+
+            .row
+                .col-md-6
+                    div.form-group
+                        label(for="from") Du
+                        input(type="date", class="form-control", name="from" placeholder="" value="#{moment(post.from).format('YYYY-MM-DD')}")
+                .col-md-6
+                    div.form-group
+                        label(for="to") Au
+                        input(type="date", class="form-control", name="to" placeholder="" value="#{moment(post.to).format('YYYY-MM-DD')}")
+
+            div.form-group
+                label(for="texte") Texte
+                textarea(name="texte" class="form-control" rows="5") #{post.texte}
+            
+            if post.post_type == "page"
+                hr
+                div.form-group 
+                    h3 
+                        span Images 
+                        a(href="/admin/attachments/attachments-table" class="ajax btn btn-info" data-target="#modal_image" data-input-target="images") Afficher les images  
+                    -var cl = "images";
+                    -var images = post.images;
+                    include posts-images-table
+
+            
+            hr
+            div.form-group 
+                h3 
+                    span Utilisateurs  
+                    a(href="/admin/users/users-in-table" class="ajax btn btn-info" data-target="#modal_users" data-input-target="users_in") Afficher les utilisateurs
+                -var cl = "users_in";
+                -var users = post.users_in;
+                include ../users/users-in-table
+            
+            
+            hr
+            div.form-group
+                input(type="submit", class="btn btn-lg btn-primary btn-block", value="Update")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

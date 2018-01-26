@@ -2638,7 +2638,10 @@ body.loading {
 pre {
   display: block;
   background-color: yellow;
-  color: black; }
+  color: black;
+  font-size: 13px;
+  line-height: 1.2em;
+  padding: 1em; }
 
 .stripe {
   z-index: 9;
@@ -2700,13 +2703,12 @@ header {
     line-height: 27px; }
 
 .themes {
-  display: flex; }
-  .themes .col {
-    max-width: 50%; }
-    .themes .col:nth-child(1) {
-      padding-right: 40px; }
+  display: flex;
+  justify-content: space-between; }
   .themes .theme {
-    cursor: pointer; }
+    cursor: pointer;
+    min-width: calc(50vw - 40px);
+    max-width: calc(50vw - 40px); }
     .themes .theme:hover .item-heading h2 {
       color: #f01644; }
     .themes .theme:hover .item-heading .duration {

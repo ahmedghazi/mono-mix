@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
+const session         = require('express-session');
+const flash           = require('connect-flash');
+const passport        = require('passport');
 const os              = require("os");
 const cron            = require('../app/lib/cron');
 const helpers            = require('../app/lib/helpers');
@@ -29,6 +32,16 @@ module.exports = (app, config) => {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
+  app.use(session({ 
+          secret: process.env.SESSION_SECRET || "blabla",
+          resave: true,
+          saveUninitialized: true,
+
+      })); // session secret
+
+      app.use(passport.initialize());
+      app.use(passport.session()); // persistent login sessions
+      app.use(flash()); // use connect-flash for flash messages stored in session
 
   app.locals.moment = require('moment');
   //app.locals.momentTz = require('moment-timezone');
@@ -38,6 +51,12 @@ module.exports = (app, config) => {
   }else{
       app.locals.root_url = "http://5.196.12.161:3006";
   }
+
+  var controllers = glob.sync(config.root + '/app/controllers/*/*.js');
+      controllers.forEach(function (controller) {
+        //console.log(controller)
+      require(controller)(app);
+  });
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach((controller) => {

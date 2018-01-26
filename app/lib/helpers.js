@@ -123,7 +123,7 @@ exports.process = function(min, _res) {
         function(_post, callback) {
             if (_post.type == "video" && _post.link && _post.message) {
        
-                console.log("--- now < post", min < Math.round(+new Date(_post.updated_time) / 1000),min )
+                //console.log("--- now < post", min < Math.round(+new Date(_post.updated_time) / 1000),min )
                 if(min != ""){
                     if (Math.round(+new Date(_post.updated_time) / 1000) > min){
                         self.record(_post, function(){
@@ -170,7 +170,7 @@ exports.process = function(min, _res) {
 exports.record = function(_post, callback) {
     var self = this;
 
-    if(_post.message.toLowerCase().indexOf("theme :") == -1){
+    if(_post.message.toLowerCase().indexOf("theme") == -1){
         callback();
     }else if(_post.link.indexOf("youtube") == -1){
         callback();
@@ -178,75 +178,101 @@ exports.record = function(_post, callback) {
         //console.log("link        : "+_post.link)
         //console.log("description : "+_post.description)
         //console.log("message     : "+_post.message)
-        var theme = _post.message.split(":")[1];
-        var theme = self.clean(theme)
-        console.log("theme    : "+theme)
-
-        //callback();
-        var query = {name: theme}
-        var update = {name: theme}
-        Category.findOneAndUpdate(query, update, {
-            upsert: true,
-            'new': true
-        }, function(err, category, raw) {
-            //console.log(category)
-            var query = {name: _post.from.name}
-            var update = {name: _post.from.name}
-            Users.findOneAndUpdate(query, update, {
+        //var theme = _post.message.replace(/theme/gi, "");
+        //console.log("_post.message",_post.message)
+        //var regex = /THEME\s(\w+)/g;
+        var regex = /(?<=\THEME\s)(\w+)/i;
+        var matches = _post.message.match(regex);
+        if(!matches){
+            var regex = /(?<=\THEME:\s)(\w+)/i;
+            matches = _post.message.match(regex);
+        }
+        if(!matches){
+            var regex = /(?<=\THEME :\s)(\w+)/i;
+            matches = _post.message.match(regex);
+        }
+        if(!matches){
+            var regex = /(?<=\THEME  :\s)(\w+)/i;
+            matches = _post.message.match(regex);
+        }
+        
+        if(!matches){
+            callback();
+        }else{
+            //if(matches && matches.length > 0)
+            console.log("theme     : ",matches[0])
+            var theme = matches[0];
+            var query = {name: theme}
+            var update = {name: theme}
+            Category.findOneAndUpdate(query, update, {
                 upsert: true,
                 'new': true
-            }, function(err, user, raw) {
-                //console.log(user)
+            }, function(err, category, raw) {
+                //console.log(category)
+                var query = {name: _post.from.name}
+                var update = {name: _post.from.name}
+                Users.findOneAndUpdate(query, update, {
+                    upsert: true,
+                    'new': true
+                }, function(err, user, raw) {
+                    //console.log(user)
 
-                self.get_yt_data(_post.link, function(result) {
-                    //console.log(result)
-                    var query = {link: _post.link}
+                    self.get_yt_data(_post.link, function(result) {
+                        //console.log(result)
+                        var query = {link: _post.link}
 
-                    var postNameClean = self.clean(_post.name)
-                    console.log(_post.name, postNameClean)
-                    var update = {
-                        fbid: _post.id,
-                        type: _post.type,
-                        name: postNameClean,
-                        message: _post.message,
-                        description: _post.description,
-                        updated_time: _post.updated_time,
-                        link: _post.link,
-                        duration: result.duration,
-                        image: result.image,
-                        videoId: result.videoId,
-                        user: user,
-                        category: category
-                    }
-                    Post.findOneAndUpdate(query, update, {
-                        upsert: true,
-                        'new': true
-                    }, function(err, post, raw) {
-                        
-                        var query = {name: theme}
-                        var update = {$addToSet: {posts: post}}
-
-                        Category.findOneAndUpdate(query, update, {
+                        var postNameClean = self.clean(_post.name)
+                        console.log(_post.name, postNameClean)
+                        var update = {
+                            fbid: _post.id,
+                            type: _post.type,
+                            name: postNameClean,
+                            message: _post.message,
+                            description: _post.description,
+                            updated_time: _post.updated_time,
+                            link: _post.link,
+                            duration: result.duration,
+                            image: result.image,
+                            videoId: result.videoId,
+                            user: user,
+                            category: category
+                        }
+                        Post.findOneAndUpdate(query, update, {
                             upsert: true,
                             'new': true
-                        }, function(err, category, raw) {
-                            callback();
+                        }, function(err, post, raw) {
+                            
+                            var query = {name: theme}
+                            var update = {$addToSet: {posts: post}}
+
+                            Category.findOneAndUpdate(query, update, {
+                                upsert: true,
+                                'new': true
+                            }, function(err, category, raw) {
+                                callback();
+                            });
                         });
                     });
-                });
 
-                
+                    
+                });
             });
-        });
+
+            //callback();
+
+        }
     }
     
     
 };
 
 exports.clean = function(name) {
-    name = name.replace("http", "");
-    name = name.replace("https", "");
+    //name = name.replace("http", "");
+    //name = name.replace("https", "");
     name = name.replace(/\n/g, "");
+    name = name.replace(/ : /g, "");
+    name = name.replace(/:/g, "");
+    name = name.replace(/(https?:\/\/[^\s]+)/g, '');
     return name;
 };
 

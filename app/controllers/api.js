@@ -34,6 +34,24 @@ router.get('/', function(req, res, next) {
     res.send("api")
 });
 
+router.get('/setup', function (req, res, next) {
+    var body = {
+        email:"admin",
+        password:"passssap",
+        type:"admin"
+    }
+
+    var user = new Users(body);
+    user.save(function(err) {
+        if (err) {
+            return res.send(err);
+        }
+
+        res.redirect('/');
+    });
+    
+});
+
 router.get('/cat-all', function (req, res, next) {
     return Category
         .find()

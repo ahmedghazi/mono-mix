@@ -4,13 +4,13 @@
 		//pre category
 		.row.middle-xs
 			.col-md-8
-				h2 #{category.name}
+				h2 #{category.name} 
 			.col-md-4.text-right
 				.metas
 					-var duration = 0;
 					each track in category.posts
 						-duration += parseFloat(track.duration)
-					.duration #{moment.utc(duration*1000).format('mm:ss')}
+					.duration #{moment.utc(duration*1000).format('mm:ss')} 
 					img(src="img/play.svg" alt="play" class="play")
 					img(src="img/pause.svg" alt="pause" class="pause")
 

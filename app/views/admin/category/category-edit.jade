@@ -1,0 +1,28 @@
+extends ../layout
+
+
+    
+prepend content
+
+    section.submit
+        //pre #{category}
+        
+        form(name="submit", action="/admin/category/edit/#{category._id}", method="POST")
+            
+            h3= title 
+        
+            
+            div.form-group
+                label(for="last_name") Nom
+                input(type="text", class="form-control", name="name" placeholder="" value="#{category.name}")
+
+            
+
+            
+
+            div.form-group
+                input(type="submit", class="btn btn-lg btn-primary btn-block", value="Submit")
+
+        
+        
+            
