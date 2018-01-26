@@ -204,7 +204,7 @@ exports.record = function(_post, callback) {
         }else{
             //if(matches && matches.length > 0)
             console.log("theme     : ",matches[1])
-            var theme = matches[0];
+            var theme = matches[1];
             var query = {name: theme}
             var update = {name: theme}
             Category.findOneAndUpdate(query, update, {
