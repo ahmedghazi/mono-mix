@@ -3,8 +3,18 @@
 @media screen and (max-device-width: 640px) {
 
 	.visible-xs{display: block;}
+	
+	html, body,
+	h1, h2, h3{
+		font-size: $font0;
+	}
+	.play,
+	.pause{max-height: 20px;}
+	
 	header{
 		height: 52px!important;
+		.description{display: none;}
+		#search-wrap{display: none;}
 
 		.burger{
 			position: fixed;
@@ -17,63 +27,23 @@
 			}
 		}
 
-		.nav{
-			display: none;
-			position: fixed;
-			top: 52px; left: 0;
-			width: 100vw;
-			
-			padding: 0 $padding2 $padding2;
-			nav{margin-bottom: $padding2}
-		}
-
-		#search{
-			&.slideTop{pointer-events: none;}
-			form{
-				input{font-size: $font1;}
-			}
-		}
+		
 	}
 
-	section{
-		padding-top: 72px;
-
-		.liste{
-			.item{
-				margin-bottom: $padding2;
-				.col-left{
-					margin-bottom: $padding2;
-					.title{
-						font-size: $font1;
-						min-height: $font1;
+	#page{
+		padding-top: 65px;
+	}
+	.themes{
+		flex-direction: column;
+		.theme{
+			min-width: 100%;
+			max-width: 100%;
+			.item-body{
+				.mix{
+					.track{
+						.track-name{min-height: 24px;}
 					}
 				}
-				figure{
-					height: auto;
-					img{
-						height: auto;
-						width: 100%;
-					}
-				}
-			}
-		}
-
-		.liste-images{
-			display: block;
-		}
-
-		&.contributors{
-			column-count: 1;
-			.contributor{
-				font-size: $font1;
-				line-height: 1.1em;
-			}
-		}
-
-		&.about{
-			p{
-				font-size: $font1;
-				line-height: 1.1em;
 			}
 		}
 	}

@@ -56,9 +56,16 @@
 					color: $red;
 					border-bottom: $border solid;
 					.track-name{
-						white-space: nowrap;
 						overflow: hidden;
-						text-overflow: ellipsis;
+						position: relative;
+  						min-height: 42px;
+						.autoradio{
+							position: absolute;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							width: 100%;
+						}
 						span{color: $color}
 					}
 					.action{
@@ -69,6 +76,7 @@
 					}
 
 					&:hover{
+						color: $purple;
 						.action{
 							.time{display: none;}
 							//.pause{display: block;}
@@ -76,6 +84,13 @@
 					}
 
 					&.is-playing{
+						color: $purple;
+						.autoradio{
+							text-overflow:initial;
+							overflow-x: auto;
+							width: auto;
+							animation: autoradio 5s linear infinite;
+						}
 						.action{
 							.play{display: none;}
 							.time{display: block;}
@@ -101,4 +116,9 @@
 
 	}
 	
+}
+
+@keyframes autoradio {
+    0%   { transform: translate(0, 0); }
+    100%   { transform: translate(-100%, 0); }
 }

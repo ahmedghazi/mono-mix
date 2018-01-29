@@ -2742,9 +2742,15 @@ header {
         color: #f01644;
         border-bottom: 1px solid; }
         .themes .theme .item-body .mix .track .track-name {
-          white-space: nowrap;
           overflow: hidden;
-          text-overflow: ellipsis; }
+          position: relative;
+          min-height: 42px; }
+          .themes .theme .item-body .mix .track .track-name .autoradio {
+            position: absolute;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%; }
           .themes .theme .item-body .mix .track .track-name span {
             color: #9428f0; }
         .themes .theme .item-body .mix .track .action {
@@ -2754,16 +2760,25 @@ header {
             display: none; }
           .themes .theme .item-body .mix .track .action .time {
             display: none; }
-        .themes .theme .item-body .mix .track:hover .action .time {
-          display: none; }
-        .themes .theme .item-body .mix .track.is-playing .action .play {
-          display: none; }
-        .themes .theme .item-body .mix .track.is-playing .action .time {
-          display: block; }
-        .themes .theme .item-body .mix .track.is-playing:hover .time {
-          display: none; }
-        .themes .theme .item-body .mix .track.is-playing:hover .pause {
-          display: block; }
+        .themes .theme .item-body .mix .track:hover {
+          color: #9428f0; }
+          .themes .theme .item-body .mix .track:hover .action .time {
+            display: none; }
+        .themes .theme .item-body .mix .track.is-playing {
+          color: #9428f0; }
+          .themes .theme .item-body .mix .track.is-playing .autoradio {
+            text-overflow: initial;
+            overflow-x: auto;
+            width: auto;
+            animation: autoradio 5s linear infinite; }
+          .themes .theme .item-body .mix .track.is-playing .action .play {
+            display: none; }
+          .themes .theme .item-body .mix .track.is-playing .action .time {
+            display: block; }
+          .themes .theme .item-body .mix .track.is-playing:hover .time {
+            display: none; }
+          .themes .theme .item-body .mix .track.is-playing:hover .pause {
+            display: block; }
         .themes .theme .item-body .mix .track.is-pause:hover .time {
           display: none; }
         .themes .theme .item-body .mix .track.is-pause:hover .pause {
@@ -2771,6 +2786,11 @@ header {
         .themes .theme .item-body .mix .track.is-pause:hover .play {
           display: block; }
 
+@keyframes autoradio {
+  0% {
+    transform: translate(0, 0); }
+  100% {
+    transform: translate(-100%, 0); } }
 #player {
   display: none; }
 
@@ -2784,8 +2804,20 @@ header {
   .visible-xs {
     display: block; }
 
+  html, body,
+  h1, h2, h3 {
+    font-size: 20px; }
+
+  .play,
+  .pause {
+    max-height: 20px; }
+
   header {
     height: 52px !important; }
+    header .description {
+      display: none; }
+    header #search-wrap {
+      display: none; }
     header .burger {
       position: fixed;
       top: 27px;
@@ -2830,41 +2862,14 @@ header {
         -ms-transform: translateY(-6px) rotate(-45deg);
         -o-transform: translateY(-6px) rotate(-45deg);
         transform: translateY(-6px) rotate(-45deg); }
-    header .nav {
-      display: none;
-      position: fixed;
-      top: 52px;
-      left: 0;
-      width: 100vw;
-      padding: 0 20px 20px; }
-      header .nav nav {
-        margin-bottom: 20px; }
-    header #search.slideTop {
-      pointer-events: none; }
-    header #search form input {
-      font-size: 35px; }
 
-  section {
-    padding-top: 72px; }
-    section .liste .item {
-      margin-bottom: 20px; }
-      section .liste .item .col-left {
-        margin-bottom: 20px; }
-        section .liste .item .col-left .title {
-          font-size: 35px;
-          min-height: 35px; }
-      section .liste .item figure {
-        height: auto; }
-        section .liste .item figure img {
-          height: auto;
-          width: 100%; }
-    section .liste-images {
-      display: block; }
-    section.contributors {
-      column-count: 1; }
-      section.contributors .contributor {
-        font-size: 35px;
-        line-height: 1.1em; }
-    section.about p {
-      font-size: 35px;
-      line-height: 1.1em; } }
+  #page {
+    padding-top: 65px; }
+
+  .themes {
+    flex-direction: column; }
+    .themes .theme {
+      min-width: 100%;
+      max-width: 100%; }
+      .themes .theme .item-body .mix .track .track-name {
+        min-height: 24px; } }
