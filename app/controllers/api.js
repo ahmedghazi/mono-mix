@@ -139,12 +139,12 @@ router.get('/last-posts', function(req, res, next) {
         });
     });
 });
-/*
+
 router.get('/yt', function(req, res, next) {
     helpers.get_yt_data("https://www.youtube.com/watch?v=Dbe_DIv_Ja0", function(result) {
         return res.json(result)
     });
-});*/
+});
 
 router.get('/count', function(req, res, next) {
     helpers.set_total();

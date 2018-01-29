@@ -130,16 +130,13 @@ exports.process = function(min, _res) {
                             callback();
                         });
                     }else{
-                        
                         _res.paging = null;
                         callback();
                     }
                 }else{
-                    
-                    self.record(_post, function(){
+                    self.record(_post, function(p){
                         callback();
                     });
-                    
                 }
             } else {
                 callback();
@@ -159,6 +156,7 @@ exports.process = function(min, _res) {
                     //console.log(body);
                     self.process(min, JSON.parse(body))
                 }).setMaxListeners(0);
+                
             } else {
                 console.log("record done, paging empty")
                 //self.set_total();
@@ -167,37 +165,22 @@ exports.process = function(min, _res) {
     );
 };
 
-exports.record = function(_post, callback) {
+
+
+exports.record = function(post, callback) {
     var self = this;
 
-    if(_post.message.toLowerCase().indexOf("them") == -1){
+    if(post.message.toLowerCase().indexOf("them") == -1){
         callback();
-    }else if(_post.link.indexOf("youtube") == -1){
+    }else if(post.link.indexOf("youtube") == -1){
         callback();
     }else{
-        //console.log("link        : "+_post.link)
-        //console.log("description : "+_post.description)
-        //console.log("message     : "+_post.message)
-        //var theme = _post.message.replace(/theme/gi, "");
-        //console.log("_post.message",_post.message)
-        //var regex = /THEME\s(\w+)/g;
-
-        //var matches = _post.message.match(/(?<=\btheme\s)(\w+)/i);
         
-        var matches = _post.message.match(/theme\s(\w+)/i);
-        
-        if(!matches){
-            matches = _post.message.match(/theme:\s(\w+)/i);
-        }
-        if(!matches){
-            matches = _post.message.match(/theme :\s(\w+)/i);
-        }
-        if(!matches){
-            matches = _post.message.match(/theme  :\s(\w+)/i);
-        }
-        if(!matches){
-            matches = _post.message.match(/thema\s(\w+)/i);
-        }
+        var matches = post.message.match(/theme\s(\w+)/i);
+        if(!matches) matches = post.message.match(/theme:\s(\w+)/i);
+        if(!matches) matches = post.message.match(/theme :\s(\w+)/i);
+        if(!matches) matches = post.message.match(/theme  :\s(\w+)/i);
+        if(!matches) matches = post.message.match(/thema\s(\w+)/i);
         
         if(!matches){
             callback();
@@ -212,61 +195,171 @@ exports.record = function(_post, callback) {
                 'new': true
             }, function(err, category, raw) {
                 //console.log(category)
-                var query = {name: _post.from.name}
-                var update = {name: _post.from.name}
-                Users.findOneAndUpdate(query, update, {
-                    upsert: true,
-                    'new': true
-                }, function(err, user, raw) {
-                    //console.log(user)
+                self.record_user_and_post_by_cat(category, post, function(_post){
+                    //console.log(__post.fbid)
+                    if(!_post.link){
+                        callback()
+                    }else{
+                        var query = {name: theme}
+                        var update = {$addToSet: {posts: _post}}
 
-                    self.get_yt_data(_post.link, function(result) {
-                        //console.log(result)
-                        var query = {link: _post.link}
-
-                        var postNameClean = self.clean(_post.name)
-                        console.log(_post.name, postNameClean)
-                        var update = {
-                            fbid: _post.id,
-                            type: _post.type,
-                            name: postNameClean,
-                            message: _post.message,
-                            description: _post.description,
-                            updated_time: _post.updated_time,
-                            link: _post.link,
-                            duration: result.duration,
-                            image: result.image,
-                            videoId: result.videoId,
-                            user: user,
-                            category: category
-                        }
-                        Post.findOneAndUpdate(query, update, {
+                        Category.findOneAndUpdate(query, update, {
                             upsert: true,
                             'new': true
-                        }, function(err, post, raw) {
-                            
-                            var query = {name: theme}
-                            var update = {$addToSet: {posts: post}}
+                        }, function(err, category, raw) {
+                            //callback();
+                            self.get_comments(_post.fbid, function(comments){
+                                async.each(comments,
+                                    function(comment, cb) {
+                                        //console.log("comment.name",comment)
+                                        if(!comment.link || comment.link.indexOf("youtube") == -1){
+                                            cb()
+                                        }else{
+                                            self.record_user_and_post_by_cat(category, comment, function(___post){
+                                                console.log("___post.name",___post.name)
+                                                
+                                                var query = {name: theme}
+                                                var update = {$addToSet: {posts: ___post}}
 
-                            Category.findOneAndUpdate(query, update, {
-                                upsert: true,
-                                'new': true
-                            }, function(err, category, raw) {
-                                callback();
+                                                Category.findOneAndUpdate(query, update, {
+                                                    upsert: true,
+                                                    'new': true
+                                                }, function(err, category, raw) {
+                                                    cb()
+                                                });
+
+                                            });
+                                        }
+                                    },
+                                    function(err) {
+                                        console.log("done for ",theme)
+                                        callback()
+                                        
+                                    }
+                                );
                             });
+
                         });
-                    });
-
+                    }
                     
-                });
+                })
             });
-
-            //callback();
-
         }
+    }  
+};
+
+exports.record_user_and_post_by_cat = function(category, post, callback) {
+    var self = this;
+
+    var query = {name: post.from.name}
+    var update = {name: post.from.name}
+    Users.findOneAndUpdate(query, update, {
+        upsert: true,
+        'new': true
+    }, function(err, user, raw) {
+        console.log("post.link",post.link)
+        if(!post.link){
+            callback(post)
+        }else{
+            self.get_yt_data(post.link, function(result) {
+                //console.log("status",result.status)
+                if(!result.status){
+                    callback(post)
+                }else{
+                    //console.log(result.title)
+                    var query = {link: post.link}
+                    var update = {
+                        fbid: post.id,
+                        type: "link",
+                        
+                        //message: post.message,
+                        //description: post.description,
+                        updated_time: post.updated_time,
+                        link: post.link,
+
+                        name: result.title,
+                        duration: result.duration,
+                        image: result.image,
+                        videoId: result.videoId,
+                        user: user,
+                        category: category
+                    }
+                    Post.findOneAndUpdate(query, update, {
+                        upsert: true,
+                        'new': true
+                    }, function(err, _post, raw) {
+                        callback(_post)
+                    });
+                }
+
+
+            });
+        }
+    });
+};
+
+exports.get_comments = function(post_id, callback) {
+    var arr = [];
+    FB.setAccessToken('398286323958628|IrwxIREQmoqa0x8G2zTIj7AmzP8');
+    FB.api(post_id+'/comments', function(_res) {
+        if (!_res || _res.error) {
+            console.log(!_res ? 'error occurred' : _res.error);
+        }
+        
+        async.each(_res.data,
+            function(__post, _callback) {
+                var matches = __post.message.match(/(https?:\/\/[^\s]+)/g);
+                if(matches){
+                    __post.link = matches[0]
+                }
+                arr.push(__post);
+                _callback()
+            },
+            function(err) {
+                callback(arr);
+            }
+        );
+    });
+};
+
+exports.get_yt_data = function(url, callback) {
+    //console.log("get_yt_data",url)
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    
+    if(!match || url.indexOf("youtube") == -1){
+        callback({status: false})
+    }else{
+        console.log("getById",match[2])
+
+        youTube.getById(match[2], function(error, result) {
+            if(error){
+                console.log(error)
+                callback({
+                    status: false
+                })
+            }else if(result.items.length == 0){
+                callback({
+                    status: false
+                })
+            }else{
+
+        //console.log(result.items[0].snippet.title)
+        //console.log(result.items[0].contentDetails)
+                var duration = result.items[0].contentDetails.duration;
+                var dur = moment.duration(duration).format("ss");
+                
+                var image = result.items[0].snippet.thumbnails.high.url;
+                callback({
+                    status: true,
+                    title: result.items[0].snippet.title,
+                    duration: dur,
+                    image: image,
+                    videoId: match[2]
+                })
+            }
+        });
     }
-    
-    
 };
 
 exports.clean = function(name) {
@@ -310,23 +403,5 @@ exports.updateOptions = function(key, value, callback) {
         });
 };
 
-exports.get_yt_data = function(url, callback) {
-    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    
-    youTube.getById(match[2], function(error, result) {
-        if(error)console.log(error)
 
-        var duration = result.items[0].contentDetails.duration;
-        var dur = moment.duration(duration).format("ss");
-        
-        var image = result.items[0].snippet.thumbnails.high.url;
-        callback({
-            duration: dur,
-            image: image,
-            videoId: match[2]
-        })
-        
-    });
-};
 
