@@ -65,6 +65,7 @@
 							overflow: hidden;
 							text-overflow: ellipsis;
 							width: 100%;
+							//animation: all 5s linear infinite;
 						}
 						span{color: $color}
 					}
@@ -77,6 +78,12 @@
 
 					&:hover{
 						color: $purple;
+						.autoradio{
+							text-overflow:initial;
+							overflow-x: auto;
+							width: auto;
+							animation: autoradio 5s linear infinite;
+						}
 						.action{
 							.time{display: none;}
 							//.pause{display: block;}
@@ -89,7 +96,7 @@
 							text-overflow:initial;
 							overflow-x: auto;
 							width: auto;
-							animation: autoradio 5s linear infinite;
+							animation: autoradioFull 5s linear infinite;
 						}
 						.action{
 							.play{display: none;}
@@ -117,8 +124,12 @@
 	}
 	
 }
-
 @keyframes autoradio {
-    0%   { transform: translate(0, 0); }
+    0%   { transform: translate(0%, 0); }
+    100%   { transform: translate(-100%, 0); }
+}
+
+@keyframes autoradioFull {
+    0%   { transform: translate(100%, 0); }
     100%   { transform: translate(-100%, 0); }
 }

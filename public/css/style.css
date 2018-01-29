@@ -2762,6 +2762,11 @@ header {
             display: none; }
         .themes .theme .item-body .mix .track:hover {
           color: #9428f0; }
+          .themes .theme .item-body .mix .track:hover .autoradio {
+            text-overflow: initial;
+            overflow-x: auto;
+            width: auto;
+            animation: autoradio 5s linear infinite; }
           .themes .theme .item-body .mix .track:hover .action .time {
             display: none; }
         .themes .theme .item-body .mix .track.is-playing {
@@ -2770,7 +2775,7 @@ header {
             text-overflow: initial;
             overflow-x: auto;
             width: auto;
-            animation: autoradio 5s linear infinite; }
+            animation: autoradioFull 5s linear infinite; }
           .themes .theme .item-body .mix .track.is-playing .action .play {
             display: none; }
           .themes .theme .item-body .mix .track.is-playing .action .time {
@@ -2788,7 +2793,12 @@ header {
 
 @keyframes autoradio {
   0% {
-    transform: translate(0, 0); }
+    transform: translate(0%, 0); }
+  100% {
+    transform: translate(-100%, 0); } }
+@keyframes autoradioFull {
+  0% {
+    transform: translate(100%, 0); }
   100% {
     transform: translate(-100%, 0); } }
 #player {
