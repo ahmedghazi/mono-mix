@@ -9,38 +9,27 @@
 		cursor: pointer;
 		min-width: calc(50vw - 40px);
 		max-width: calc(50vw - 40px);
-		&:hover{
-			.item-heading{
-				h2{color: $red;}
-				.duration{display: none;}
-				.pause{display: none;}
-				.play{display: block;}
-			}
-		}
-		&.active{
-			.item-heading{
-				border-bottom: $border solid;
-				.duration{display: block!important;}
-				//.pause{display: none;}
-				//.play{display: none;}
-			}
-			.item-body{
-				display: block;
-			}
-			&:hover{
-				.item-heading{
-					//.duration{display: none!important;}
-					.play{display: none;}
-					.pause{display: none;}
-				}
-			}
-		}
+		
 
 		.item-heading{
 			h2{
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
+			}
+			.deco{
+				pointer-events: none;
+				width: 100vw; height: 100vh;
+				position: fixed!important;
+				left: 50%; top: 50%;
+				transform: translate(-50%,-50%);
+				display: none;
+				z-index: 9999;
+				.img404{display: none;}
+				
+				img{
+					margin: auto;
+				}
 			}
 			.metas{
 				display: flex;
@@ -77,12 +66,13 @@
 					}
 
 					&:hover{
-						color: $purple;
+						//color: $purple;
 						.autoradio{
 							text-overflow:initial;
 							overflow-x: auto;
 							width: auto;
 							animation: autoradio 5s linear infinite;
+							//span{color: $red;}
 						}
 						.action{
 							.time{display: none;}
@@ -120,7 +110,36 @@
 			}
 		}
 
-
+		&:hover{
+			.item-heading{
+				h2{
+					color: $red
+				}
+				.deco{display: flex}
+				.duration{display: none;}
+				.pause{display: none;}
+				.play{display: block;}
+			}
+		}
+		&.active{
+			.item-heading{
+				border-bottom: $border solid;
+				.deco{display: flex}
+				.duration{display: block!important;}
+				//.pause{display: none;}
+				//.play{display: none;}
+			}
+			.item-body{
+				display: block;
+			}
+			&:hover{
+				.item-heading{
+					//.duration{display: none!important;}
+					.play{display: none;}
+					.pause{display: none;}
+				}
+			}
+		}
 	}
 	
 }

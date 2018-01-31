@@ -5,6 +5,8 @@
 		.row.middle-xs
 			.col-xs-8.col-md-8
 				h2 #{category.name} 
+				.deco
+					img(src="img/visuals/#{category.name}.svg" onerror="this.className='img404'")
 			.col-xs-4.col-md-4.text-right
 				.metas
 					-var duration = 0;
@@ -22,10 +24,11 @@
 					.row.middle-xs
 						.col-xs-8.col-md-8
 							-var pattern = new RegExp(category.name, 'gi');
-							-var name = track.name.replace(pattern, '<span>'+category.name+'</span>')
+							-var matches = pattern.exec(track.name);
+							//pre #{matches}
+							-var name = track.name.replace(matches, '<span>'+matches+'</span>')
 							h3.track-name 
 								.autoradio !{name}
-
 					
 						.col-xs-4.col-md-4.text-right
 							div.action
