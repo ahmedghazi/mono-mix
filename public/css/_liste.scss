@@ -29,6 +29,7 @@
 				
 				img{
 					margin: auto;
+					max-width: 80vw;
 				}
 			}
 			.metas{
@@ -36,7 +37,9 @@
 				justify-content: flex-end;
 				img{display: none;}
 			}
-			
+			&:hover{
+				.deco{display: flex}
+			}
 		}
 		.item-body{
 			display: none;
@@ -115,7 +118,7 @@
 				h2{
 					color: $red
 				}
-				.deco{display: flex}
+				
 				.duration{display: none;}
 				.pause{display: none;}
 				.play{display: block;}
@@ -124,7 +127,7 @@
 		&.active{
 			.item-heading{
 				border-bottom: $border solid;
-				.deco{display: flex}
+				//.deco{display: flex}
 				.duration{display: block!important;}
 				//.pause{display: none;}
 				//.play{display: none;}
