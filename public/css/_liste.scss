@@ -22,14 +22,15 @@
 				width: 100vw; height: 100vh;
 				position: fixed!important;
 				left: 50%; top: 50%;
-				transform: translate(-50%,-50%);
-				display: none;
+				transform: translate(-50%,-50%) scale(.5,.5);
+				opacity: 0;
+				display: flex;
 				z-index: 9999;
-				.img404{display: none;}
-				
+				@include anime();
 				img{
 					margin: auto;
 					max-width: 80vw;
+					&.img404{display: none;}
 				}
 			}
 			.metas{
@@ -38,7 +39,10 @@
 				img{display: none;}
 			}
 			&:hover{
-				.deco{display: flex}
+				.deco{
+					opacity: 1;
+					transform: translate(-50%,-50%) scale(1,1);
+				}
 			}
 		}
 		.item-body{

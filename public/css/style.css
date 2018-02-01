@@ -2719,21 +2719,24 @@ header {
       position: fixed !important;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
-      display: none;
-      z-index: 9999; }
-      .themes .theme .item-heading .deco .img404 {
-        display: none; }
+      transform: translate(-50%, -50%) scale(0.5, 0.5);
+      opacity: 0;
+      display: flex;
+      z-index: 9999;
+      transition: all 0.2s ease-in-out 0s; }
       .themes .theme .item-heading .deco img {
         margin: auto;
         max-width: 80vw; }
+        .themes .theme .item-heading .deco img.img404 {
+          display: none; }
     .themes .theme .item-heading .metas {
       display: flex;
       justify-content: flex-end; }
       .themes .theme .item-heading .metas img {
         display: none; }
     .themes .theme .item-heading:hover .deco {
-      display: flex; }
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1, 1); }
     .themes .theme .item-body {
       display: none; }
       .themes .theme .item-body .mix .track {
