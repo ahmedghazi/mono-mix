@@ -16,6 +16,16 @@ var searchController = (function () {
             $("#search-wrap").removeClass("is-active")
         });
 
+        $("html").on("click", "#search-wrap .layer", function(e){
+            $("#search-wrap").removeClass("is-active")
+        });
+
+        $(document).keydown(function(e) {
+            if (e.which == 27) {
+                $("#search-wrap").removeClass("is-active")
+            }
+        });
+
         $("html").on("click", "#search-wrap label", function(){
             console.log("label")
             $(this).parents("#search-wrap").toggleClass("is-active")
@@ -48,7 +58,8 @@ var searchController = (function () {
                 });
             }
         });
-    
+        
+
     }
 
 })();

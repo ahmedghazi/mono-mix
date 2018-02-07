@@ -27,9 +27,13 @@ var YoutubePlayer = function(){
 	
 	this.bindEvents = function(){
 		$(document).keydown(function(e) {
+			//console.log()
 		    if (e.which == 32) {
-		    	pubsub.emit("SPACE")
-		        return false;
+		    	console.log($("#search-wrap").hasClass("is-active"))
+		    	if(!$("#search-wrap").hasClass("is-active")){
+		    		pubsub.emit("SPACE")
+		        	return false;
+		        }
 		    }
 		});
 

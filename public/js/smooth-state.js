@@ -39,7 +39,7 @@ var smoothState = (function () {
                 }
             }
         };
-console.log(options)
+//console.log(options)
         smoothState = $('#page').smoothState(options).data('smoothState');
         //console.log(smoothState)
         /*

@@ -27,8 +27,18 @@
 	position: fixed;
 	top: $padding1; right: $padding2;
 	width: 150px; height: 27px;
+	overflow: hidden;
 	@include anime(.3s);
+	.layer{
+		position: absolute;
+		width: 100vw; height: 100vh;
+		left: 0; top: 0;
+		background-color: transparent;
+		z-index: 1;
+	}
 	form{
+		position: relative;
+		z-index: 2;
 		font-size: $font1;
 		//border-bottom: 3px solid;
 		display: flex;
@@ -64,13 +74,14 @@
 	}
 
 	&.is-active{
-		width: 100vw; height: 112px;
+		width: 100vw; height: 90px;
 		border-bottom: $border solid;
 		background-color: white;
 		color: $red;
 		top: 0; right: 0;
 		padding: $padding1 $padding2;
 		line-height: 30px;
+		overflow: initial;
 		form{
 			//justify-content: space-between;
 			max-height: 30px;

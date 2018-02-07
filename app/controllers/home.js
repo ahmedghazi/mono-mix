@@ -73,7 +73,10 @@ router.get('/s/:term', function (req, res, next) {
 				        });
 				    });
 			}else{
-				return res.json(posts);
+				return res.render('index', {
+		        	title: 'MONO MIX',
+		          	categories: []
+		        });
 			}
 			//console.log(app.get('title'));
 			

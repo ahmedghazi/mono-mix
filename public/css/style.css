@@ -493,8 +493,19 @@ a {
   right: 20px;
   width: 150px;
   height: 27px;
+  overflow: hidden;
   transition: all 0.3s ease-in-out 0s; }
+  #search-wrap .layer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-color: transparent;
+    z-index: 1; }
   #search-wrap form {
+    position: relative;
+    z-index: 2;
     font-size: 35px;
     display: flex;
     justify-content: flex-end;
@@ -534,14 +545,15 @@ a {
         display: none; }
   #search-wrap.is-active {
     width: 100vw;
-    height: 112px;
+    height: 90px;
     border-bottom: 1px solid;
     background-color: white;
     color: #f01644;
     top: 0;
     right: 0;
     padding: 10px 20px;
-    line-height: 30px; }
+    line-height: 30px;
+    overflow: initial; }
     #search-wrap.is-active form {
       max-height: 30px; }
       #search-wrap.is-active form input {
