@@ -46,17 +46,17 @@ router.get('/s/:term', function (req, res, next) {
 				console.log(err);
 				return next(err);
 			}
+			console.log("posts.length",posts.length)
 			if(posts.length){
 				//let cat_id = posts[0].category._id
-				let where = []
+				var ids = []
 				for(var i in posts){
-					where.push({
-						_id: posts[i].category._id
-					})
+					ids.push(posts[i].category._id)
 				}
+				console.log("where",ids)
 				Category
 				    //.findOne({_id: posts[0].category._id})
-				    .find({ $and: where})
+				    .find({ _id: { $in:ids } })
 				    .populate({path: 'posts'})
 				    .sort({name: 'asc'})
 				    //.limit(postsPerPage)
