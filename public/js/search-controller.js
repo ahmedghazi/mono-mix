@@ -41,8 +41,8 @@ var searchController = (function () {
                   url: '/s/'+value
                 })
                 .done(function( data ) {
-                    $(".liste").html(data)
-                    history.pushState({}, 'SEARCHING : '+value,'/search/'+value)
+                    $('.themes').html($(".themes", data).html());
+                    history.pushState({}, 'SEARCHING : '+value,'/s/'+value)
                     //if(!data)get_page(document.title, "/")
                     $("body").removeClass("loading");
                 });

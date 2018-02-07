@@ -11,7 +11,7 @@ if duration > 1200
                 .col-xs-8.col-md-8
                     h2 #{category.name}
                     .deco
-                        img(src="img/visuals/#{category.name.toLowerCase()}.svg" onerror="this.className='img404'")
+                        img(src="/img/visuals/#{category.name.toLowerCase()}.svg" onerror="this.className='img404'")
                 .col-xs-4.col-md-4.text-right
                     .metas
                         //-var tot = duration * 1000;
@@ -23,8 +23,8 @@ if duration > 1200
                         else
                             .duration #{moment("2015-01-01").startOf('day').seconds(duration).format("mm:ss", { trunc: true })}
                         
-                        img(src="img/play.svg" alt="play" class="play")
-                        img(src="img/pause.svg" alt="pause" class="pause")
+                        img(src="/img/play.svg" alt="play" class="play")
+                        img(src="/img/pause.svg" alt="pause" class="pause")
 
         .item-body
             .mix
@@ -42,6 +42,6 @@ if duration > 1200
                         
                             .col-xs-4.col-md-4.text-right
                                 div.action
-                                    img(src="img/play.svg" alt="play" class="play")
-                                    img(src="img/pause.svg" alt="pause" class="pause")
+                                    img(src="/img/play.svg" alt="play" class="play")
+                                    img(src="/img/pause.svg" alt="pause" class="pause")
                                     div.time

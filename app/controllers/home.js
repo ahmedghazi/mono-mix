@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/s/:term', function (req, res, next) {
   //var skip = parseInt(req.params.id * postsPerPage);
-  	return Category
+  	return Post
 	  	.find({
 			"$or": [
 		  	{ name : { $regex: req.params.term, $options: 'i' }}
@@ -40,16 +40,47 @@ router.get('/s/:term', function (req, res, next) {
 			]
 	  	})
 	  	.sort({updated_time: 'desc'})
+	  	.populate({path: 'category'})
 	  	.exec(function(err, posts) {
 			if (err) {
 				console.log(err);
 				return next(err);
 			}
+			if(posts.length){
+				//let cat_id = posts[0].category._id
+				let where = []
+				for(var i in posts){
+					where.push({
+						_id: posts[i].category._id
+					})
+				}
+				Category
+				    //.findOne({_id: posts[0].category._id})
+				    .find({ $and: where})
+				    .populate({path: 'posts'})
+				    .sort({name: 'asc'})
+				    //.limit(postsPerPage)
+				    .exec(function(err, categories) {
+				        if (err) {
+				            console.log(err);
+				            return next(err);
+				        }
+				        
+				        //return res.json(categories);
+				        return res.render('index', {
+				        	title: 'MONO MIX',
+				          	categories: categories
+				        });
+				    });
+			}else{
+				return res.json(posts);
+			}
 			//console.log(app.get('title'));
-			return res.render('liste', {
+			
+			/*return res.render('liste', {
 				title: 'MONO MIX',
 			  	categories: posts
-			});
+			});*/
   	});
   
 });

@@ -117,31 +117,22 @@ var YoutubePlayer = function(){
 	};
 	
 	this.onPlayerStateChange = function(event){
-		console.log(event.data)
+		//console.log(event.data)
 		switch(event.data){		
 			case -1:
 				$("body").addClass("loading");
 			break;
 			case 0:
 				clearInterval(enterFrame);
-				//Piecon.reset()
-				//Piecon.setProgress(50);
-				//$("html").trigger("NEXT",[IDX]);
 				pubsub.emit("NEXT")
 			break;
 			case 1:
 				duration = player.getDuration();
-				enterFrame = setInterval(_this.update, 250);			
-				//PIETIMER = setInterval(_this.updatePie, 2000);		
+				enterFrame = setInterval(_this.update, 250);				
 				$("body").removeClass("loading");
-
-				//$(el).addClass("currentItemPlaying").removeClass("state_pause");
-				//$("#player").removeClass('state_pause');
 			break;
 			case 2:
 				clearInterval(enterFrame);
-				//$(el).removeClass("currentItemPlaying").addClass("state_pause");
-				//$("#player").addClass('state_pause');
 			break;
 			case 3:
 				$("body").addClass("loading");
@@ -156,11 +147,6 @@ var YoutubePlayer = function(){
 		//Piecon.reset()
 		//$("html").trigger("NEXT",[IDX]);
 		pubsub.emit("NEXT")
-	};
-	
-	this.updatePie = function(){
-		console.log(PROGRESSION)
-		//Piecon.setProgress(PROGRESSION*100);
 	};
 
 	this.update = function(){
@@ -186,30 +172,25 @@ var YoutubePlayer = function(){
 	}
 	
 	this.loadVideoByUrl = function(url){
-		console.log(url)
+		//console.log(url)
 		player.loadVideoByUrl(url);
 	};
 
 	this.loadVideoById = function(_id){
-		//player.stopVideo();
-		//$("#player").removeClass('offside_bottom');
-		console.log(_id)
+		//console.log(_id)
 		player.loadVideoById(_id);
 	};
 	
 	this.play = function(){
 		player.playVideo();
-		//$("#player").removeClass('state_pause');
 	};
 	
 	this.stop = function(){
 		player.stopVideo();
-		//$("#player").addClass('state_pause');
 	};
 	
 	this.pause = function(){
 		player.pauseVideo();
-		//$("#player").addClass('state_pause');
 	};
 	
 	this.setVolume = function(val){
@@ -230,10 +211,7 @@ var YoutubePlayer = function(){
 			player.seekTo(pos,true);
 		});
 	};
-
-	this.updateTitle = function(_title){
-		//$("#player").find(".track").text(_title);
-	}
+	
 }
 
 //IMPORTANT MUST BE OUTSIDE THIS OBJECT SCOPE

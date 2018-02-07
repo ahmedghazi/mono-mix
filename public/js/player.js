@@ -81,7 +81,22 @@ var playerController = (function () {
         $(".track").removeClass("is-playing")
         $(".theme.active").find(".track").eq(videoIDX).addClass("is-playing");
 
-        if(theme != $(".theme.active").find("h2").text().trim().toLowerCase())update_deco();
+        update_meta_title();
+        //if(theme != $(".theme.active").find("h2").text().trim().toLowerCase())update_deco();
+    }
+
+    function update_meta_title() {
+        var title = $(".theme.active").find(".track").eq(videoIDX).find("h3").text().trim();
+        console.log(title)
+        titleScroller("MONOMIX ▶ "+title)
+    }
+
+    function titleScroller(text){
+        document.title = text;
+        //console.log(text);
+        setTimeout(function () {
+            titleScroller(text.substr(1) + text.substr(0, 1));
+        }, 400);
     }
 
     function update_deco() {
