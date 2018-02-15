@@ -24,10 +24,33 @@ router.get('/', function(req, res, next) {
 	        //return res.json(posts);
 	        res.render('index', {
 	        	title: 'MONO MIX',
-	          	categories: categories
+	          	categories: categories,
+	          	theme: ""
 	        });
 	    });
 });
+
+router.get('/theme/:theme', function(req, res, next) {
+	return Category
+	    .find()
+	    .populate({path: 'posts'})
+	    .sort({name: 'asc'})
+	    //.limit(postsPerPage)
+	    .exec(function(err, categories) {
+	        if (err) {
+	            console.log(err);
+	            return next(err);
+	        }
+	        //console.log(app.get('title'));
+	        //return res.json(posts);
+	        res.render('index', {
+	        	title: 'MONO MIX',
+	          	categories: categories,
+	          	theme: req.params.theme
+	        });
+	    });
+});
+
 
 router.get('/s/:term', function (req, res, next) {
   //var skip = parseInt(req.params.id * postsPerPage);
@@ -35,8 +58,6 @@ router.get('/s/:term', function (req, res, next) {
 	  	.find({
 			"$or": [
 		  	{ name : { $regex: req.params.term, $options: 'i' }}
-		  //{ link : { $regex: req.params.term, $options: 'i' }},
-		  //{ from : { $regex: req.params.term, $options: 'i' }}
 			]
 	  	})
 	  	.sort({updated_time: 'desc'})
@@ -78,12 +99,7 @@ router.get('/s/:term', function (req, res, next) {
 		          	categories: []
 		        });
 			}
-			//console.log(app.get('title'));
-			
-			/*return res.render('liste', {
-				title: 'MONO MIX',
-			  	categories: posts
-			});*/
+		
   	});
   
 });

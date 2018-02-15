@@ -52,7 +52,7 @@ var searchController = (function () {
                 })
                 .done(function( data ) {
                     $('.themes').html($(".themes", data).html());
-                    history.pushState({}, 'SEARCHING : '+value,'/s/'+value)
+                    history.pushState({}, 'SEARCHING : '+value, '/s/'+value)
                     //if(!data)get_page(document.title, "/")
                     $("body").removeClass("loading");
                 });

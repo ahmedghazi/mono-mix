@@ -54,6 +54,7 @@ var playerController = (function () {
             $(".theme").removeClass("active");
             $(this).addClass("active");
 
+            var theme = $(this).find("h2").text()
             arrVideoIds = [];
             videoIDX = 0;
             
@@ -61,6 +62,8 @@ var playerController = (function () {
                 var videoID = $(this).data("video_id");
                 //console.log(videoID)
                 arrVideoIds.push(videoID);
+                
+                history.pushState({}, 'THEME : '+theme, "/theme/"+theme.toLowerCase())
             });
 
             //play_by_idx();

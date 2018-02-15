@@ -3,7 +3,8 @@ each track in category.posts
     -duration += parseFloat(track.duration)
 
 if duration > 1200
-    .theme
+    -var classe = theme == category.name.toLowerCase() ? "active" : "";
+    div(class="theme #{classe}")
         .item-heading
             .row.middle-xs
                 .col-xs-8.col-md-8
@@ -23,7 +24,6 @@ if duration > 1200
         .item-body
             .mix
                 each track in category.posts
-                    //pre #{track}
                     include track
             .contrib
                 form(class="contrib--form" method="post" action="/api/contrib/#{category._id}")
