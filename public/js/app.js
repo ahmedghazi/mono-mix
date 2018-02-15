@@ -10,39 +10,7 @@
 		}, 1000);
 	}
 
-	function loader_mouse(){
-		bsDiv = document.getElementById("loader");
-
-		pubsub.on("navChanged", function(){
-			place_loader();
-		});
-		
-        /*
-        window.addEventListener('mousemove', function(event){
-            x = event.clientX;
-            y = event.clientY;     
-            //if(!document.body.classList.contains('loading'))return;
-
-            place_loader()
-        }, false);
-        */
-
-        pubsub.on("_onLevelChange", function(volume){
-        	console.log("_onLevelChange")
-        	console.log(volume)
-        })
-	}
-
-	function place_loader(){
-		if ( typeof x !== 'undefined' ){
-		    bsDiv.style.left = x + "px";
-		    bsDiv.style.top = y + "px";
-		}
-	}
-
-	function count_click(){
-
-	}
+	
 
 
 })( jQuery );

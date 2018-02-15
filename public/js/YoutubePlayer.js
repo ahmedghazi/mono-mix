@@ -145,7 +145,7 @@ var YoutubePlayer = function(){
 	};
 
 	this.onPlayerError = function(event){
-		//console.log("error",event.data)
+		console.log("error",event)
 		//clearInterval(enterFrame);
 		//clearInterval(PIETIMER);
 		//Piecon.reset()
@@ -162,7 +162,7 @@ var YoutubePlayer = function(){
 		var prog = player.getVideoLoadedFraction();
 		var percent = (player.getCurrentTime() / duration);
 		var pw = $(".track.is-playing").width();
-		console.log(pw)
+	
 		//buffer
 		var progress = pw * prog;
 		//$("#player").find(".buffer").css("width",progress)
