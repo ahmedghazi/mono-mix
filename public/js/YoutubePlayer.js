@@ -172,7 +172,8 @@ var YoutubePlayer = function(){
 		//$("#player").find(".scrubber").css("width",w)
 
 		PROGRESSION = percent;
-	//	Piecon.setProgress(percent*100);
+
+		//console.log("volume",micController.volume())
 	}
 	
 	this.loadVideoByUrl = function(url){

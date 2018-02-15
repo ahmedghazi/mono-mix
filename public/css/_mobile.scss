@@ -14,17 +14,25 @@
 	header{
 		height: 52px!important;
 		.description{display: none;}
-		#search-wrap{display: none;}
+		#search-wrap{
+			display: block;
+			label{display: none;}
+			&.is-active{
+				height: 53px;
+				label{display: block;}
+			} 
+		}
 
 		.burger{
-			position: fixed;
+			display: none;
+			/*position: fixed;
 			top: 27px;
 			right: $padding2;
 			z-index: 99999;
 			@include burger(20px, 1px, 5px, #fff);
 			&.is-active{
 				@include burger-to-cross;
-			}
+			}*/
 		}
 
 		

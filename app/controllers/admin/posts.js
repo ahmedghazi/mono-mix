@@ -86,9 +86,10 @@ router.get('/filter/:f', function (req, res, next) {
 
 router.post('/search', function (req, res, next) {
     var searchString = req.body.s;
+    console.log(req.body.s)
     Posts
         .find({'$or':[
-            {'title':{'$regex':searchString, '$options':'i'}},
+            {'name':{'$regex':searchString, '$options':'i'}},
             //{'first_name':{'$regex':searchString, '$options':'i'}},
             //{'last_name':{'$regex':searchString, '$options':'i'}}
         ]})

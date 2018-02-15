@@ -7,6 +7,7 @@ var contribController = (function () {
     }
 
     function bind_events() {
+     
         $(".contrib--form").on("submit", function(e){
             e.preventDefault();
             var $mix = $(this).parents(".item-body").children(".mix");
@@ -26,6 +27,8 @@ var contribController = (function () {
                 if(data.status == true){
                     $mix.append(data.html)
                     $input.val("");
+                    
+                    pubsub.emit("CONTRIB_NEW")
                 }
                 $("body").removeClass("loading");
             });

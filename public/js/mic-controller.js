@@ -95,73 +95,81 @@ function volumeAudioProcess( event ) {
     this.volume = Math.max(rms, this.volume*this.averaging);
 }
 
-var audioContext = null;
-var meter = null;
-var rafID = null;
-
-window.onload = function() {
-
-    // grab our canvas
-    //canvasContext = document.getElementById( "meter" ).getContext("2d");
+var micController = (function () {
     
-    // monkeypatch Web Audio
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    var audioContext = null;
+    var meter = null;
+    var rafID = null;
+
+    var mediaStreamSource = null;
+
+    init()
     
-    // grab an audio context
-    audioContext = new AudioContext();
+    function init() {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        
+        // grab an audio context
+        audioContext = new AudioContext();
 
-    // Attempt to get audio input
-    try {
-        // monkeypatch getUserMedia
-        navigator.getUserMedia = 
-            navigator.getUserMedia ||
-            navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia;
+        // Attempt to get audio input
+        try {
+            // monkeypatch getUserMedia
+            navigator.getUserMedia = 
+                navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia;
 
-        // ask for an audio input
-        navigator.getUserMedia(
-        {
-            "audio": {
-                "mandatory": {
-                    "googEchoCancellation": "false",
-                    "googAutoGainControl": "false",
-                    "googNoiseSuppression": "false",
-                    "googHighpassFilter": "false"
+            // ask for an audio input
+            navigator.getUserMedia(
+            {
+                "audio": {
+                    "mandatory": {
+                        "googEchoCancellation": "false",
+                        "googAutoGainControl": "false",
+                        "googNoiseSuppression": "false",
+                        "googHighpassFilter": "false"
+                    },
+                    "optional": []
                 },
-                "optional": []
-            },
-        }, onMicrophoneGranted, onMicrophoneDenied);
-    } catch (e) {
-        alert('getUserMedia threw exception :' + e);
+            }, onMicrophoneGranted, onMicrophoneDenied);
+        } catch (e) {
+            alert('getUserMedia threw exception :' + e);
+        }
     }
 
-}
+    function onMicrophoneDenied() {
+        console.log('Stream generation failed. Please allow mic');
+    }
 
-function onMicrophoneDenied() {
-    console.log('Stream generation failed. Please allow mic');
-}
+    function onMicrophoneGranted(stream) {
+        // Create an AudioNode from the stream.
+        mediaStreamSource = audioContext.createMediaStreamSource(stream);
 
-var mediaStreamSource = null;
+        // Create a new volume meter and connect it.
+        meter = createAudioMeter(audioContext);
+        mediaStreamSource.connect(meter);
 
-function onMicrophoneGranted(stream) {
-    // Create an AudioNode from the stream.
-    mediaStreamSource = audioContext.createMediaStreamSource(stream);
+        // kick off the visual updating
+        onLevelChange();
+    }
 
-    // Create a new volume meter and connect it.
-    meter = createAudioMeter(audioContext);
-    mediaStreamSource.connect(meter);
+    function onLevelChange( time ) {
+        
+        //console.log(meter);
+        //pubsub.emit("_onLevelChange", meter.volume)
+        $(".theme.active").find(".deco").css({
+            transform: "translate(-50%, -50%) scale("+(0.7+meter.volume)+", "+(0.7+meter.volume)+")"
+        })
+        // set up the next visual callback
+        rafID = window.requestAnimationFrame( onLevelChange );
+    }
 
-    // kick off the visual updating
-    onLevelChange();
-}
+    function get_volume() {
+        return meter.volume
+    }
 
-function onLevelChange( time ) {
-    
-    console.log(meter.volume);
-    pubsub.emit("_onLevelChange", meter.volume)
-    $(".theme.active").find(".deco").css({
-        transform:"translate(-50%, -50%) scale("+(0.5+meter.volume)+", "+(0.5+meter.volume)+")"
-    })
-    // set up the next visual callback
-    rafID = window.requestAnimationFrame( onLevelChange );
-}
+    return {
+        volume: get_volume
+    };
+
+})();

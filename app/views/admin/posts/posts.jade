@@ -38,17 +38,9 @@ block content
                         a(href="/admin/posts/sort/name/-1") ↓
                     td 
                         span Date 
-                        a(href="/admin/posts/sort/date/1") ↑ 
-                        a(href="/admin/posts/sort/date/-1") ↓
-                    td 
-                        span Categorie 
-                        a(href="/admin/posts/sort/category/1") ↑ 
-                        a(href="/admin/posts/sort/category/-1") ↓
-                    td Invités
-                    td 
-                        span Status 
-                        a(href="/admin/posts/sort/post_status/1") ↑ 
-                        a(href="/admin/posts/sort/post_status/-1") ↓
+                        a(href="/admin/posts/sort/createdAt/1") ↑ 
+                        a(href="/admin/posts/sort/createdAt/-1") ↓
+                    td Categorie 
                     td Actions
             tbody
 
@@ -58,12 +50,10 @@ block content
                             
                     td #{moment(post.createdAt).format('DD.MM.YYYY')}
 
-                    td #{post.category}
-                    td 
-                        if post.users_in
-                            span #{post.users_in.length}
+                    td #{post.category.name}
+                    
 
-                    td #{post.post_status}
+               
                     td.btn-group
                             a(href="/admin/posts/edit/#{post._id}" class="btn btn-primary") Edit
                             a(target="_blank" href="/c/#{post.category}/#{post.slug}" class="btn btn-default") Voir

@@ -208,13 +208,14 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 button {
   cursor: pointer;
-  -webkit-appearance: button;
+  -webkit-appearance: none;
+  background-color: transparent;
 }
 
 input {
   &[type="button"], &[type="reset"], &[type="submit"] {
     cursor: pointer;
-    -webkit-appearance: button;
+    -webkit-appearance: none;
   }
   &[type="search"] {
     -webkit-appearance: textfield;

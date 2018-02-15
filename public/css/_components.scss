@@ -28,7 +28,7 @@
 	top: $padding1; right: $padding2;
 	width: 150px; height: 27px;
 	overflow: hidden;
-	@include anime(.3s);
+	//@include anime(.3s);
 	.layer{
 		position: absolute;
 		width: 100vw; height: 100vh;
@@ -44,11 +44,11 @@
 		display: flex;
 		justify-content: flex-end;
 		max-height: 27px;
-		@include anime(.3s);
+		//@include anime(.3s);
 		label{
 			margin-right: $padding1;
 			cursor: pointer;
-			@include anime(.3s);
+		//	@include anime(.3s);
 		}
 		input{
 			background-color: transparent;
@@ -59,7 +59,7 @@
 			border-bottom: $border solid;
 			color: $red;
 			//display: none;
-			@include anime(.3s);
+			//@include anime(.3s);
 			@include placeholder($color);
 			&:focus{
 				max-width: 80%;

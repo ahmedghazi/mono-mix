@@ -17,22 +17,21 @@ block content
         table.table.table-striped
             thead
                 tr.panel.panel-default
-                    td Date d'inscription
-                    td Nom
-                    td Email
-                    td Type
-                    td Actions
+                    td
+                        span Name
+                        a(href="/admin/category/sort/name/1") ↑ 
+                        a(href="/admin/category/sort/name/-1") ↓
                     
-            tbody
+                    td.text-right Actions
+                    
+            
             each category in categories
                 tr
-                    td #{moment(category.createdAt).format('MMMM Do YYYY')}
                     td #{category.name}
-                    td #{category.email}
-                    td #{category.category_type}
-                    td.btn-group
-                        a(href="/admin/category/edit/#{category._id}" class="btn btn-primary") Edit
-                        a(href="/admin/category/delete/#{category._id}" class="btn btn-danger") Delete
+                    td.text-right
+                        .btn-group
+                            a(href="/admin/category/edit/#{category._id}" class="btn btn-primary") Edit
+                            a(href="/admin/category/delete/#{category._id}" class="btn btn-danger") Delete
                     
                     
         

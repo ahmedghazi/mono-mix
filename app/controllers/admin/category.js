@@ -51,6 +51,23 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/sort/:k/:s',  function (req, res, next) {
+    var s = req.params.s;
+    var k = req.params.k;
+    Category
+        .find()
+        .sort([[k, s]])
+        .exec(function(err, categories) {
+            if (err) return next(err);
+            
+            res.render('admin/category/category', {
+                title: 'Category',
+                categories: categories,
+                admin: req.category
+            });
+    });
+});
+
 
 router.get('/new', function (req, res, next) {
     return res.render('admin/category/category-new', {

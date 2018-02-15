@@ -40,6 +40,14 @@ var playerController = (function () {
 
             play_by_idx();
         });
+
+        pubsub.on("CONTRIB_NEW", function(e){
+            arrVideoIds = [];
+            $(".theme.active").find(".track").each(function(idx, el){
+                var videoID = $(this).data("video_id");
+                arrVideoIds.push(videoID);
+            });
+        });
         
         $("html").on("click", ".theme", function(e){
             e.stopPropagation();
@@ -87,7 +95,7 @@ var playerController = (function () {
 
     function update_meta_title() {
         var title = $(".theme.active").find(".track").eq(videoIDX).find("h3").text().trim();
-        console.log(title)
+        //console.log(title)
         titleScroller("MONOMIX ▶ "+title)
     }
 
