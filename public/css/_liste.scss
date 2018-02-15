@@ -51,6 +51,7 @@
 				.track{
 					color: $red;
 					border-bottom: $border solid;
+					position: relative;
 					.track-name{
 						overflow: hidden;
 						position: relative;
@@ -69,9 +70,23 @@
 						display: flex;
 						justify-content: flex-end;
 						.pause{display: none;}
-						.time{display: none;}
+						.time{
+							display: none;
+							.seconds{color: $purple}
+						}
 					}
+					.scrubber{
+						height: 3px;
+						width: 0;
+						position: absolute;
+						bottom: 0;
+						background-color: $red;
+						@include anime(); 
 
+					}
+					&:not(.is-playing){
+						.scrubber{width: 0!important}
+					}
 					&:hover{
 						//color: $purple;
 						.autoradio{
@@ -88,7 +103,7 @@
 					}
 
 					&.is-playing{
-						color: $purple;
+						//color: $purple;
 						.autoradio{
 							text-overflow:initial;
 							overflow-x: auto;
@@ -116,19 +131,21 @@
 				}
 			}
 			.contrib{
-				background-color: $purple;
+				//background-color: $purple;
+				height: 78px;
+				border-bottom: $border solid $purple;
 				form{
 					@include flexbox();
 					justify-content: space-between;
 					input{
 						background-color: transparent;
-						color: white;
-						@include _placeholder(white);
+						color: $purple;
+						@include _placeholder($purple);
 						&[type=text]{
-							padding: 5px 9px 6px;
+							padding: 5px 9px 6px 0;
 							min-width: 80%;
 						}
-						&[type=submit]{padding: 1px 19px 10px;}
+						&[type=submit]{padding: 1px 0px 10px;}
 					}
 				}
 			}

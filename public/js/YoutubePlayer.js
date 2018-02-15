@@ -157,12 +157,12 @@ var YoutubePlayer = function(){
 		
 		var seconds = secondsToHms( player.getCurrentTime() );
 		//$(".time").text(seconds+"/"+secondsToHms(duration));
-		$(".track.is-playing").find(".time").text(seconds+"/"+secondsToHms(duration));
+		$(".track.is-playing").find(".time").html('<span class="seconds">'+seconds+'</span> <span class="duration">'+secondsToHms(duration)+'</span>');
 
 		var prog = player.getVideoLoadedFraction();
 		var percent = (player.getCurrentTime() / duration);
-		var pw = $("#player").width();
-		
+		var pw = $(".track.is-playing").width();
+		console.log(pw)
 		//buffer
 		var progress = pw * prog;
 		//$("#player").find(".buffer").css("width",progress)
@@ -170,6 +170,7 @@ var YoutubePlayer = function(){
 		//scrubber
 		var w = pw * percent;
 		//$("#player").find(".scrubber").css("width",w)
+		$(".track.is-playing").find(".scrubber").css({width:(percent*100)+"%"})
 
 		PROGRESSION = percent;
 

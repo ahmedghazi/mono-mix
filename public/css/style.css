@@ -2749,7 +2749,8 @@ header {
       display: none; }
       .themes .theme .item-body .mix .track {
         color: #f01644;
-        border-bottom: 1px solid; }
+        border-bottom: 1px solid;
+        position: relative; }
         .themes .theme .item-body .mix .track .track-name {
           overflow: hidden;
           position: relative;
@@ -2769,6 +2770,17 @@ header {
             display: none; }
           .themes .theme .item-body .mix .track .action .time {
             display: none; }
+            .themes .theme .item-body .mix .track .action .time .seconds {
+              color: #9428f0; }
+        .themes .theme .item-body .mix .track .scrubber {
+          height: 3px;
+          width: 0;
+          position: absolute;
+          bottom: 0;
+          background-color: #f01644;
+          transition: all 0.2s ease-in-out 0s; }
+        .themes .theme .item-body .mix .track:not(.is-playing) .scrubber {
+          width: 0 !important; }
         .themes .theme .item-body .mix .track:hover .autoradio {
           text-overflow: initial;
           overflow-x: auto;
@@ -2776,21 +2788,19 @@ header {
           animation: autoradio 5s linear infinite; }
         .themes .theme .item-body .mix .track:hover .action .time {
           display: none; }
-        .themes .theme .item-body .mix .track.is-playing {
-          color: #9428f0; }
-          .themes .theme .item-body .mix .track.is-playing .autoradio {
-            text-overflow: initial;
-            overflow-x: auto;
-            width: auto;
-            animation: autoradioFull 5s linear infinite; }
-          .themes .theme .item-body .mix .track.is-playing .action .play {
-            display: none; }
-          .themes .theme .item-body .mix .track.is-playing .action .time {
-            display: block; }
-          .themes .theme .item-body .mix .track.is-playing:hover .time {
-            display: none; }
-          .themes .theme .item-body .mix .track.is-playing:hover .pause {
-            display: block; }
+        .themes .theme .item-body .mix .track.is-playing .autoradio {
+          text-overflow: initial;
+          overflow-x: auto;
+          width: auto;
+          animation: autoradioFull 5s linear infinite; }
+        .themes .theme .item-body .mix .track.is-playing .action .play {
+          display: none; }
+        .themes .theme .item-body .mix .track.is-playing .action .time {
+          display: block; }
+        .themes .theme .item-body .mix .track.is-playing:hover .time {
+          display: none; }
+        .themes .theme .item-body .mix .track.is-playing:hover .pause {
+          display: block; }
         .themes .theme .item-body .mix .track.is-pause:hover .time {
           display: none; }
         .themes .theme .item-body .mix .track.is-pause:hover .pause {
@@ -2798,7 +2808,8 @@ header {
         .themes .theme .item-body .mix .track.is-pause:hover .play {
           display: block; }
       .themes .theme .item-body .contrib {
-        background-color: #9428f0; }
+        height: 78px;
+        border-bottom: 1px solid #9428f0; }
         .themes .theme .item-body .contrib form {
           display: -webkit-box;
           display: -webkit-flex;
@@ -2808,24 +2819,24 @@ header {
           justify-content: space-between; }
           .themes .theme .item-body .contrib form input {
             background-color: transparent;
-            color: white; }
+            color: #9428f0; }
             .themes .theme .item-body .contrib form input::-webkit-input-placeholder {
-              color: white;
+              color: #9428f0;
               font-style: italic; }
             .themes .theme .item-body .contrib form input:-moz-placeholder {
-              color: white;
+              color: #9428f0;
               font-style: italic; }
             .themes .theme .item-body .contrib form input::-moz-placeholder {
-              color: white;
+              color: #9428f0;
               font-style: italic; }
             .themes .theme .item-body .contrib form input:-ms-input-placeholder {
-              color: white;
+              color: #9428f0;
               font-style: italic; }
             .themes .theme .item-body .contrib form input[type=text] {
-              padding: 5px 9px 6px;
+              padding: 5px 9px 6px 0;
               min-width: 80%; }
             .themes .theme .item-body .contrib form input[type=submit] {
-              padding: 1px 19px 10px; }
+              padding: 1px 0px 10px; }
     .themes .theme:hover .item-heading h2 {
       color: #f01644; }
     .themes .theme:hover .item-heading .duration {
