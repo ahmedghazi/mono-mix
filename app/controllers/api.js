@@ -150,7 +150,63 @@ router.get('/count', function(req, res, next) {
     helpers.set_total();
 });
 
+router.post('/contrib/:id', function (req, res, next) {
+    var query = {_id: req.params.id}
+    Category
+        .findOne(query)
+        .exec(function(err, category) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+            helpers.get_yt_data(req.body.url, function(result) {
+                
+                if(!result.status){
+                    //callback(post)
+                    return res.json({status:false})
+                }else{
+                    //console.log(result.title)
+                    var query = {link: req.body.url}
+                    var update = {
+                        type: "link",
+                        link: req.body.url,
+                        name: result.title,
+                        duration: result.duration,
+                        image: result.image,
+                        videoId: result.videoId,
+                        category: category
+                    }
+                    Post.findOneAndUpdate(query, update, {
+                        upsert: true,
+                        'new': true
+                    }, function(err, _post, raw) {
+                        var query = {_id: req.params.id}
+                        var update = {$addToSet: {posts: _post}}
 
+                        Category.findOneAndUpdate(query, update, {
+                            upsert: true,
+                            'new': true
+                        }, function(err, category, raw) {
+
+                            res.render('track', {
+                                category: category,
+                                track: _post
+                            }, function(err, html){
+                                return res.json({
+                                    status:true,
+                                    data: _post,
+                                    html: html
+                                })
+                            })
+                            
+                        });
+                    });
+                }
+
+            });
+            
+        });
+});
 
 
 

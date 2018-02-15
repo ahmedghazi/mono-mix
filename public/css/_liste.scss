@@ -26,7 +26,7 @@
 				opacity: 0;
 				display: flex;
 				z-index: 9999;
-				@include anime();
+				//@include anime();
 				img{
 					margin: auto;
 					max-width: 80vw;
@@ -113,6 +113,23 @@
 						}
 					}
 					
+				}
+			}
+			.contrib{
+				background-color: $purple;
+				form{
+					@include flexbox();
+					justify-content: space-between;
+					input{
+						background-color: transparent;
+						color: white;
+						@include _placeholder(white);
+						&[type=text]{
+							padding: 5px 9px 6px;
+							min-width: 80%;
+						}
+						&[type=submit]{padding: 1px 19px 10px;}
+					}
 				}
 			}
 		}

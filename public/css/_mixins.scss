@@ -101,11 +101,11 @@ $all-text-inputs-focus: assign-inputs($inputs-list, focus);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
-@mixin _placeholder {
-  &::-webkit-input-placeholder {@content}
-  &:-moz-placeholder           {@content}
-  &::-moz-placeholder          {@content}
-  &:-ms-input-placeholder      {@content}  
+@mixin _placeholder($color) {
+  &::-webkit-input-placeholder {color:$color; font-style: italic;}
+  &:-moz-placeholder           {color:$color; font-style: italic;}
+  &::-moz-placeholder          {color:$color; font-style: italic;}
+  &:-ms-input-placeholder      {color:$color; font-style: italic;}  
 }
 
 @mixin scrollbars($size, $foreground-color, $background-color) {

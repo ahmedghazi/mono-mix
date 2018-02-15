@@ -26,6 +26,11 @@
             place_loader()
         }, false);
         */
+
+        pubsub.on("_onLevelChange", function(volume){
+        	console.log("_onLevelChange")
+        	console.log(volume)
+        })
 	}
 
 	function place_loader(){

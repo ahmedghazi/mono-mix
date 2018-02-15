@@ -1,0 +1,14 @@
+.track(data-video_id="#{track.videoId}" data-duration="#{track.duration}")
+    .row.middle-xs
+        .col-xs-8.col-md-8
+            -var pattern = new RegExp(category.name, 'gi');
+            -var matches = pattern.exec(track.name);
+            -var name = track.name.replace(matches, '<span>'+matches+'</span>')
+            h3.track-name 
+                .autoradio !{name} 
+    
+        .col-xs-4.col-md-4.text-right
+            div.action
+                img(src="/img/play.svg" alt="play" class="play")
+                img(src="/img/pause.svg" alt="pause" class="pause")
+                div.time

@@ -9,12 +9,12 @@ block content
 		div.col
 			each category in categories
 				if c <= len/2
-					include item
+					include mix
 				-c++
 
 		-c = 0;
 		div.col
 			each category in categories
 				if c > len/2
-					include item
+					include mix
 				-c++
