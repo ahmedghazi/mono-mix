@@ -138,7 +138,7 @@ window.onload = function() {
 }
 
 function onMicrophoneDenied() {
-    alert('Stream generation failed.');
+    console.log('Stream generation failed. Please allow mic');
 }
 
 var mediaStreamSource = null;
