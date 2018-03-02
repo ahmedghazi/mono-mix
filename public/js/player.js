@@ -76,6 +76,8 @@ var playerController = (function () {
             
             videoIDX = $(this).index();
             play_by_idx();
+            
+            update_logo(e);
         });
 
         $("html").on("click", ".track.is-playing", function(e){
@@ -121,6 +123,29 @@ var playerController = (function () {
         };
         image.src = svg;
         
+    }
+
+    function update_logo(e){
+        
+        var logo = document.querySelector(".logo");
+        var logoBounding = logo.getBoundingClientRect();
+
+        var xPos = e.pageX - logoBounding.width/2;
+        var yPos = e.pageY - logoBounding.height/2;
+
+        $(".logo").css({
+            left: xPos,
+            top: yPos
+        });
+
+        $(".logo").removeClass("bounce");
+        setTimeout(function(){
+            $(".logo").addClass("bounce");
+            setTimeout(function(){
+                $(".logo").removeClass("bounce");
+            }, 580)
+        }, 100)
+
     }
 
 })();

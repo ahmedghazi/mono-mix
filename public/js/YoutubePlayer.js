@@ -121,7 +121,7 @@ var YoutubePlayer = function(){
 	};
 	
 	this.onPlayerStateChange = function(event){
-		//console.log(event.data)
+		console.log(event.data)
 		switch(event.data){		
 			case -1:
 				$("body").addClass("loading");

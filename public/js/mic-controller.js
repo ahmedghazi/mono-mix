@@ -103,7 +103,7 @@ var micController = (function () {
 
     var mediaStreamSource = null;
 
-    init()
+    //init()
     
     function init() {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;

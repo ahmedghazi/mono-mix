@@ -27,7 +27,7 @@ gulp.task('scriptsCustom', function() {
     gulp.src(['./public/js/*.js'])
       .pipe(concat('app.js'))
       .pipe(rename({suffix: '.min'}))
-      .pipe(stripDebug())//remove logs
+      //.pipe(stripDebug())//remove logs
       .pipe(uglify())
       .pipe(gulp.dest('./public/js/dist/'));
 });
