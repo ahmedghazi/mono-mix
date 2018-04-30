@@ -1,60 +1,64 @@
 doctype html
 html(lang='en')
-  head
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    title= title
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title= title
 
-    link(rel="apple-touch-icon" sizes="57x57" href="/img/icons/apple-icon-57x57.png")
-    link(rel="apple-touch-icon" sizes="60x60" href="/img/icons/apple-icon-60x60.png")
-    link(rel="apple-touch-icon" sizes="72x72" href="/img/icons/apple-icon-72x72.png")
-    link(rel="apple-touch-icon" sizes="76x76" href="/img/icons/apple-icon-76x76.png")
-    link(rel="apple-touch-icon" sizes="114x114" href="/img/icons/apple-icon-114x114.png")
-    link(rel="apple-touch-icon" sizes="120x120" href="/img/icons/apple-icon-120x120.png")
-    link(rel="apple-touch-icon" sizes="144x144" href="/img/icons/apple-icon-144x144.png")
-    link(rel="apple-touch-icon" sizes="152x152" href="/img/icons/apple-icon-152x152.png")
-    link(rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-icon-180x180.png")
-    link(rel="icon" type="image/png" sizes="192x192"  href="/img/icons/android-icon-192x192.png")
-    link(rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png")
-    link(rel="icon" type="image/png" sizes="96x96" href="/img/icons/favicon-96x96.png")
-    link(rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png")
-    link(rel="manifest" href="/img/icons/manifest.json")
-    meta(name="msapplication-TileColor" content="#9428f0")
-    meta(name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png")
-    meta(name="theme-color" content="#9428f0")
-  
-    meta(name="description" content="Themes based music research")
-    meta(property="og:title" content="#{title}")
-    meta(property="og:description" content="Themes based music research")
-    meta(property="og:url" content="http://5.196.12.161:3006/")
-    meta(property="og:image" content="http://5.196.12.161:3006/img/share.jpg")
-    meta(property="og:site_name" content="#{title}")
-    meta(name="twitter:card" content="summary_large_image")
-    meta(name="twitter:image:alt" content="http://5.196.12.161:3006/img/share.jpg")
-
-
-    block css
-      link(rel='stylesheet', href='/css/style.css')
-    block js
-      if ENV_DEVELOPMENT
-        script(src='http://localhost:35729/livereload.js')
-      script(src='/js/vendor/modernizr.min.js')
-  body.loading
-
-    #page
-      header
-        include header
+        link(rel="apple-touch-icon" sizes="57x57" href="/img/icons/apple-icon-57x57.png")
+        link(rel="apple-touch-icon" sizes="60x60" href="/img/icons/apple-icon-60x60.png")
+        link(rel="apple-touch-icon" sizes="72x72" href="/img/icons/apple-icon-72x72.png")
+        link(rel="apple-touch-icon" sizes="76x76" href="/img/icons/apple-icon-76x76.png")
+        link(rel="apple-touch-icon" sizes="114x114" href="/img/icons/apple-icon-114x114.png")
+        link(rel="apple-touch-icon" sizes="120x120" href="/img/icons/apple-icon-120x120.png")
+        link(rel="apple-touch-icon" sizes="144x144" href="/img/icons/apple-icon-144x144.png")
+        link(rel="apple-touch-icon" sizes="152x152" href="/img/icons/apple-icon-152x152.png")
+        link(rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-icon-180x180.png")
+        link(rel="icon" type="image/png" sizes="192x192"  href="/img/icons/android-icon-192x192.png")
+        link(rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png")
+        link(rel="icon" type="image/png" sizes="96x96" href="/img/icons/favicon-96x96.png")
+        link(rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png")
+        link(rel="manifest" href="/img/icons/manifest.json")
+        meta(name="msapplication-TileColor" content="#9428f0")
+        meta(name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png")
+        meta(name="theme-color" content="#9428f0")
       
-      block content
+        meta(name="description" content="Themes based music research")
+        meta(property="og:title" content="#{title}")
+        meta(property="og:description" content="Themes based music research")
+        meta(property="og:url" content="http://5.196.12.161:3006/")
+        meta(property="og:image" content="http://5.196.12.161:3006/img/share.jpg")
+        meta(property="og:site_name" content="#{title}")
+        meta(name="twitter:card" content="summary_large_image")
+        meta(name="twitter:image:alt" content="http://5.196.12.161:3006/img/share.jpg")
 
-      footer
-        include footer
-      #loader
-        img(src="img/loader.png")
+
+        block css
+            link(rel='stylesheet', href='/css/style.css')
+        block js
+            if ENV_DEVELOPMENT
+                script(src='http://localhost:35729/livereload.js')
+            script(src='/js/vendor/modernizr.min.js')
+    
+    body.loading
+
+        #page
+            header
+                include header
+      
+            block content
+
+            footer
+                include footer
+      
+            #loader
+                .inner
+                    video(autoplay="true" loop="true")
+                        source(src="/img/monomix-loader.mp4" type="video/mp4")
       
   
 
    
-    script(src='/js/dist/vendor.min.js')
-    script(src='/js/dist/app.min.js')
+        script(src='/js/dist/vendor.min.js')
+        script(src='/js/dist/app.min.js')
 

@@ -88,6 +88,7 @@ var playerController = (function () {
     }
 
     function play_by_idx() {
+        //return
         //console.log(videoIDX)
         _YoutubePlayer.loadVideoById(arrVideoIds[videoIDX]);
 
@@ -126,7 +127,9 @@ var playerController = (function () {
     }
 
     function update_logo(e){
-        
+        var rand = 1 + Math.round(Math.random()*2)
+        $(".logo").attr("data-idx", ""+rand+"")
+
         var logo = document.querySelector(".logo");
         var logoBounding = logo.getBoundingClientRect();
 
@@ -143,7 +146,7 @@ var playerController = (function () {
             $(".logo").addClass("bounce");
             setTimeout(function(){
                 $(".logo").removeClass("bounce");
-            }, 580)
+            }, 780)
         }, 100)
 
     }

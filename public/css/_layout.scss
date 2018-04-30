@@ -1,8 +1,11 @@
 body {
   //padding: $padding2;
   &.loading{
-  	opacity: 0.5;
+  	//opacity: 0.5;
   	cursor: wait;
+  	#loader{
+  		display: block;
+  	}
   }
 }
 
@@ -55,6 +58,8 @@ pre{
 		//animation: deco 1s ease-in-out infinite alternate;
 	}
 }
+
+
 
 @keyframes deco{
 	from{

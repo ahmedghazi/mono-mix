@@ -3,7 +3,7 @@ header{
 	position: fixed; left:$padding1; top:0; right: $padding1;
 	padding: $padding1;
 	width: calc(100vw - #{$padding2});
-	z-index: 99;
+	z-index: 250;
 	@include anime(.2s);
 	
 	.description,
