@@ -57,6 +57,13 @@ var playerController = (function () {
             var theme = $(this).find("h2").text()
             arrVideoIds = [];
             videoIDX = 0;
+
+            var ptop = $(this).offset().top - 62;
+            $('html,body').stop().animate({ 
+                scrollTop: ptop,
+            }, 400, "easeInOutQuad", function(){
+                
+            });
             
             $(this).find(".track").each(function(idx, el){
                 var videoID = $(this).data("video_id");
@@ -64,6 +71,8 @@ var playerController = (function () {
                 arrVideoIds.push(videoID);
                 
                 history.pushState({}, 'THEME : '+theme, "/theme/"+theme.toLowerCase())
+                
+                
             });
 
             //play_by_idx();
