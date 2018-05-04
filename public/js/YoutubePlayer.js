@@ -134,6 +134,7 @@ var YoutubePlayer = function(){
 				duration = player.getDuration();
 				enterFrame = setInterval(_this.update, 250);				
 				$("body").removeClass("loading");
+				pubsub.emit("VIDEO_LOADED")
 			break;
 			case 2:
 				clearInterval(enterFrame);
@@ -146,11 +147,8 @@ var YoutubePlayer = function(){
 
 	this.onPlayerError = function(event){
 		console.log("error",event)
-		//clearInterval(enterFrame);
-		//clearInterval(PIETIMER);
-		//Piecon.reset()
-		//$("html").trigger("NEXT",[IDX]);
-		pubsub.emit("NEXT")
+		clearInterval(enterFrame);
+		$("body").removeClass("loading");
 	};
 
 	this.update = function(){

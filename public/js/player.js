@@ -94,6 +94,10 @@ var playerController = (function () {
             $(this).toggleClass("is-pause")
             pubsub.emit("SPACE")
         });
+
+        pubsub.on("VIDEO_LOADED", function(e){
+            anime_logo()
+        });
     }
 
     function play_by_idx() {
@@ -139,25 +143,30 @@ var playerController = (function () {
         var rand = 1 + Math.round(Math.random()*2)
         $(".logo").attr("data-idx", ""+rand+"")
 
-        var logo = document.querySelector(".logo");
+        var logo = document.querySelector("#loader");
         var logoBounding = logo.getBoundingClientRect();
+//console.log(e)
+        var xPos = e.clientX - logoBounding.width/2;
+        var yPos = e.clientY - logoBounding.height/2;
 
-        var xPos = e.pageX - logoBounding.width/2;
-        var yPos = e.pageY - logoBounding.height/2;
-
-        $(".logo").css({
+        $("#loader").css({
             left: xPos,
             top: yPos
         });
+        //$("#loader").show()
 
-        $(".logo").removeClass("bounce");
+        //anime_logo()
+
+    }
+
+    function anime_logo(){
+        $("#loader").removeClass("bounce");
         setTimeout(function(){
-            $(".logo").addClass("bounce");
+            $("#loader").addClass("bounce");
             setTimeout(function(){
-                $(".logo").removeClass("bounce");
+                $("#loader").removeClass("bounce");
             }, 780)
         }, 100)
-
     }
 
 })();

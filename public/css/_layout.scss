@@ -1,11 +1,11 @@
 body {
-  //padding: $padding2;
   &.loading{
-  	//opacity: 0.5;
+  	
   	cursor: wait;
-  	#loader{
-  		display: block;
-  	}
+  	.themes{opacity: 0.5;}
+  	// #loader{
+  	// 	display: block;
+  	// }
   }
 }
 
