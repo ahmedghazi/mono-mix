@@ -2643,8 +2643,7 @@ header {
       position: fixed !important;
       left: 50%;
       top: 50%;
-      opacity: 0;
-      display: flex;
+      display: none;
       z-index: 9999; }
       .themes .theme .item-heading .deco img {
         margin: auto;
@@ -2660,7 +2659,7 @@ header {
     .themes .theme .item-heading:hover .deco {
       width: 100vw;
       height: 100vh;
-      opacity: 1;
+      display: flex;
       transform: translate(-50%, -50%) scale(1, 1); }
     .themes .theme .item-body {
       display: none; }

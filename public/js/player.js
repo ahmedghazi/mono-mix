@@ -111,7 +111,7 @@ var playerController = (function () {
     function update_meta_title() {
         var title = $(".theme.active").find(".track").eq(videoIDX).find("h3").text().trim();
         //console.log(title)
-        titleScroller("MONOMIX ▶ "+title)
+        titleScroller(" MONOMIX ▶ "+title)
     }
 
     function titleScroller(text){
@@ -119,7 +119,7 @@ var playerController = (function () {
         //console.log(text);
         setTimeout(function () {
             titleScroller(text.substr(1) + text.substr(0, 1));
-        }, 400);
+        }, 600);
     }
 
     function update_deco() {
