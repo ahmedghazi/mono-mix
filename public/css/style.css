@@ -2845,6 +2845,8 @@ header {
     transform: rotate(360deg); } }
 #loader {
   position: fixed;
+  left: 0;
+  top: 0;
   opacity: 0;
   z-index: 249;
   width: 100%;

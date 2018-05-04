@@ -8,6 +8,8 @@ var playerController = (function () {
         _YoutubePlayer = new YoutubePlayer();
         _YoutubePlayer.init();
 
+        document.getElementById('video').play();
+
         bind_events()
     }
 
