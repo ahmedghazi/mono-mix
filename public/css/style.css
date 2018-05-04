@@ -449,8 +449,7 @@ h3 {
 
 a {
   color: #9428f0;
-  text-decoration: none;
-  cursor: url(../img/cursor-pointer.png) 31 23, auto; }
+  text-decoration: none; }
 
 .btn {
   border: 2px solid;
@@ -2611,6 +2610,12 @@ header {
   width: calc(100vw - 20px);
   z-index: 250;
   transition: all 0.2s ease-in-out 0s; }
+  header h1[data-idx='1']:hover a {
+    cursor: url(../img/dancing-note-1.svg) 64 64, auto; }
+  header h1[data-idx='2']:hover a {
+    cursor: url(../img/dancing-note-2.svg) 64 64, auto; }
+  header h1[data-idx='3']:hover a {
+    cursor: url(../img/dancing-note-3.svg) 64 64, auto; }
   header .description,
   header #search-wrap {
     line-height: 27px; }
@@ -2622,6 +2627,12 @@ header {
     cursor: pointer;
     min-width: calc(50vw - 40px);
     max-width: calc(50vw - 40px); }
+    .themes .theme .item-heading .item-heading-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex; }
     .themes .theme .item-heading h2 {
       white-space: nowrap;
       overflow: hidden;
@@ -2629,18 +2640,16 @@ header {
       text-transform: uppercase; }
     .themes .theme .item-heading .deco {
       pointer-events: none;
-      width: 100vw;
-      height: 100vh;
       position: fixed !important;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) scale(0.5, 0.5);
       opacity: 0;
       display: flex;
       z-index: 9999; }
       .themes .theme .item-heading .deco img {
         margin: auto;
-        max-width: 100vw; }
+        max-width: 100%;
+        max-height: 100%; }
         .themes .theme .item-heading .deco img.img404 {
           display: none; }
     .themes .theme .item-heading .metas {
@@ -2649,6 +2658,8 @@ header {
       .themes .theme .item-heading .metas img {
         display: none; }
     .themes .theme .item-heading:hover .deco {
+      width: 100vw;
+      height: 100vh;
       opacity: 1;
       transform: translate(-50%, -50%) scale(1, 1); }
     .themes .theme .item-body {

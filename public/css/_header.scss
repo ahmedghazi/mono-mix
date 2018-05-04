@@ -6,6 +6,11 @@ header{
 	z-index: 250;
 	@include anime(.2s);
 	
+	h1[data-idx='1']:hover a{cursor: url(../img/dancing-note-1.svg) 64 64, auto;}
+	h1[data-idx='2']:hover a{cursor: url(../img/dancing-note-2.svg) 64 64, auto;}
+	h1[data-idx='3']:hover a{cursor: url(../img/dancing-note-3.svg) 64 64, auto;}
+		
+		
 	.description,
 	#search-wrap{
 		line-height: $font1-ls;

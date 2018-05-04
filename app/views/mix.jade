@@ -8,9 +8,10 @@ if duration > 1200
         .item-heading
             .row.middle-xs
                 .col-xs-8.col-md-8
-                    h2 #{category.name}
-                    .deco
-                        img(src="/img/visuals/#{category.name.toLowerCase()}.svg" onerror="this.className='img404'")
+                    .item-heading-header
+                        h2 #{category.name}
+                        .deco
+                            img(src="/img/visuals/#{category.name.toLowerCase()}.svg" onerror="this.className='img404'")
                             
                 .col-xs-4.col-md-4.text-right
                     .metas
