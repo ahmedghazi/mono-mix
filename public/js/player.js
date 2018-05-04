@@ -8,7 +8,7 @@ var playerController = (function () {
         _YoutubePlayer = new YoutubePlayer();
         _YoutubePlayer.init();
 
-        document.getElementById('video').play();
+        
 
         bind_events()
     }
@@ -162,6 +162,7 @@ var playerController = (function () {
     }
 
     function anime_logo(){
+        document.getElementById('video').play();
         $("#loader").removeClass("bounce");
         setTimeout(function(){
             $("#loader").addClass("bounce");
