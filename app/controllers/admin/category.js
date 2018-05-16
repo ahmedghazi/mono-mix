@@ -86,7 +86,7 @@ router.post('/new', function (req, res, next) {
             return res.send(err);
         }
 
-        res.redirect('admin/category/');
+        res.redirect('/admin/category/');
         
     });
 });
