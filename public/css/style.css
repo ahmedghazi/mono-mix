@@ -2696,8 +2696,6 @@ header {
           .themes .theme .item-body .mix .track .track-name .autoradio {
             position: absolute;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             width: 100%; }
           .themes .theme .item-body .mix .track .track-name span {
             color: #9428f0; }
