@@ -67,4 +67,10 @@ html(lang='en' prefix="og: http://ogp.me/ns#")
    
         script(src='/js/dist/vendor.min.js')
         script(src='/js/dist/app.min.js')
+        script(async src="https://www.googletagmanager.com/gtag/js?id=UA-128748343-1")
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
+            gtag('config', 'UA-128748343-1');
