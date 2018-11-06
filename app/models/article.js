@@ -1,7 +1,7 @@
 // Example model
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
 const ArticleSchema = new Schema({
   title: String,
